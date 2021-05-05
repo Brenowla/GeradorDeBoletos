@@ -2,7 +2,7 @@ package com.example.geradorboletos.retrofit.di
 
 import com.example.geradorboletos.retrofit.RetrofitConstants
 import com.example.geradorboletos.retrofit.interceptor.AuthInterceptor
-import com.example.geradorboletos.retrofit.service.AuthorizeService
+import com.example.geradorboletos.retrofit.service.AutenticateService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -41,8 +41,8 @@ class RetrofitModule {
     // Services
     @Singleton
     @Provides
-    fun provideAuthenticationService(retrofit: Retrofit): AuthorizeService {
-        return retrofit.create(AuthorizeService::class.java)
+    fun provideAuthenticationService(retrofit: Retrofit): AutenticateService {
+        return retrofit.create(AutenticateService::class.java)
     }
 
 }

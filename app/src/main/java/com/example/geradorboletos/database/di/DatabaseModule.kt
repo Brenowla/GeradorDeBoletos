@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.room.Room
 import com.example.geradorboletos.database.GeradorBoletosDatabase
 import com.example.geradorboletos.database.GeradorBoletosDatabaseConstants
+import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
+@Module
 class DatabaseModule {
 
     @Singleton

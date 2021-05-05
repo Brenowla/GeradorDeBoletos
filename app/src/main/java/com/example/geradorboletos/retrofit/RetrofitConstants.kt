@@ -11,6 +11,11 @@ class RetrofitConstants private constructor(){
     object Credentials {
         const val CLIENT_ID = "Client_Id_4157a108ed28612a9b60bcea6ccb8715a032757a"
         const val CLIENT_SECRET = "Client_Secret_b32eb85955b615420be29a2ae334189135aa7541"
+        const val GRANT_TYPE = "client_credentials"
+    }
+
+    object ErrorMessages {
+        const val FAILURE_API = "Sem resposta do servidor"
     }
 
 

@@ -7,4 +7,8 @@ class GeradorBoletosDatabaseConstants private constructor(){
         const val DB_NAME = "gerador_boletos.db"
     }
 
+    object Tables {
+        const val PERSON_TABLE = "person"
+    }
+
 }
