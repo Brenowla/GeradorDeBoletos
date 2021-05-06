@@ -19,6 +19,11 @@ class SessionManager @Inject constructor(context: Context) {
         editor.apply()
     }
 
+    fun deleteAuthToken(){
+        val editor = prefs.edit()
+        editor.remove(AUTHORIZATION_TOKEN)
+    }
+
     fun fetchAuthToken(): String? {
         return prefs.getString(AUTHORIZATION_TOKEN, null)
     }

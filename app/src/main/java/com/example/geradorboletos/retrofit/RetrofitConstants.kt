@@ -6,6 +6,7 @@ class RetrofitConstants private constructor(){
     object URL {
         const val BASE = "https://sandbox.gerencianet.com.br/v1/"
         const val AUTHORIZE = "authorize"
+        const val CHARGE_BILLET = "charge/one-step"
     }
 
     object Credentials {

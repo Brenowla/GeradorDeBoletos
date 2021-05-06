@@ -1,8 +1,8 @@
-package com.example.geradorboletos.model
+package com.example.geradorboletos.models
 
 import com.google.gson.annotations.SerializedName
 
-class TokenModel (
+class Token (
     @SerializedName("access_token")
     val accessToken: String,
     @SerializedName("refresh_token")

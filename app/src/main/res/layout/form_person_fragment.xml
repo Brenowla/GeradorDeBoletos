@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.example.geradorboletos.ui.form_person.FormPersonViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/form_person_para_quem_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/para_quem"
+                android:textSize="24sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                />
+
+            <Button
+                android:id="@+id/form_person_button_fisical_person"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/form_person_para_quem_text"
+                app:layout_constraintTop_toBottomOf="@+id/form_person_para_quem_text"
+                app:layout_constraintEnd_toStartOf="@+id/form_person_button_juridical_person"
+                android:text="@string/pessoa_fisica"
+                android:backgroundTint="@color/white"
+                android:textColor="#1B4D68"
+                />
+
+            <Button
+                android:id="@+id/form_person_button_juridical_person"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:text="@string/pessoa_juridica"
+                android:textColor="#1B4D68"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/form_person_button_fisical_person"
+                app:layout_constraintTop_toTopOf="@+id/form_person_button_fisical_person" />
+
+            <TextView
+                android:id="@+id/form_person_text_full_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nome_completo"
+                app:layout_constraintStart_toStartOf="@+id/form_person_button_fisical_person"
+                app:layout_constraintTop_toBottomOf="@id/form_person_button_fisical_person"
+                android:layout_marginTop="12dp"
+                />
+
+            <EditText
+                android:id="@+id/form_person_full_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/nome_exemplo"
+                app:layout_constraintStart_toStartOf="@id/form_person_text_full_name"
+                app:layout_constraintTop_toBottomOf="@id/form_person_text_full_name"
+                app:layout_constraintEnd_toEndOf="@id/form_person_button_juridical_person"
+                android:text="@={viewModel.personBinding.name}"/>
+
+            <ImageButton
+                android:id="@+id/form_person_list_persons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_list_temporary"
+                android:backgroundTint="@color/white"
+                android:padding="2dp"
+                app:layout_constraintEnd_toEndOf="@id/form_person_full_name"
+                app:layout_constraintTop_toTopOf="@id/form_person_full_name"
+                app:layout_constraintBottom_toBottomOf="@id/form_person_full_name"
+                android:layout_marginRight="8dp"
+                />
+
+            <TextView
+                android:id="@+id/form_person_text_cpf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cpf"
+                app:layout_constraintStart_toStartOf="@id/form_person_full_name"
+                app:layout_constraintTop_toBottomOf="@id/form_person_full_name"
+                />
+
+            <EditText
+                android:id="@+id/form_person_cpf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/ex_cpf"
+                app:layout_constraintTop_toBottomOf="@id/form_person_text_cpf"
+                app:layout_constraintStart_toStartOf="@id/form_person_text_cpf"
+                app:layout_constraintEnd_toEndOf="@id/form_person_full_name"
+                android:text="@={viewModel.personBinding.cpf}"
+                />
+            
+            <TextView
+                android:id="@+id/form_person_text_corporate_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/razao_social"
+                app:layout_constraintTop_toBottomOf="@+id/form_person_cpf"
+                app:layout_constraintStart_toStartOf="@id/form_person_cpf"
+                android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
+                />
+
+            <EditText
+                android:id="@+id/form_person_corporate_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/form_person_cpf"
+                app:layout_constraintEnd_toEndOf="@id/form_person_cpf"
+                app:layout_constraintTop_toBottomOf="@id/form_person_text_corporate_name"
+                android:text="@={viewModel.personBinding.corporateName}"
+                android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
+                />
+
+            <TextView
+                android:id="@+id/form_person_text_cnpj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cnpj"
+                app:layout_constraintTop_toBottomOf="@id/form_person_corporate_name"
+                app:layout_constraintStart_toStartOf="@id/form_person_corporate_name"
+                android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
+                />
+
+            <EditText
+                android:id="@+id/form_person_cnpj"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/ex_cnpj"
+                app:layout_constraintStart_toStartOf="@id/form_person_corporate_name"
+                app:layout_constraintEnd_toEndOf="@id/form_person_corporate_name"
+                app:layout_constraintTop_toBottomOf="@id/form_person_text_cnpj"
+                android:text="@={viewModel.personBinding.cnpj}"
+                android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
+                />
+
+            <TextView
+                android:id="@+id/form_person_text_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/celular"
+                app:layout_constraintStart_toStartOf="@id/form_person_cnpj"
+                app:layout_constraintTop_toBottomOf="@id/form_person_cnpj"
+                />
+
+            <EditText
+                android:id="@+id/form_person_phone_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/ex_telefone"
+                app:layout_constraintTop_toBottomOf="@id/form_person_text_phone_number"
+                app:layout_constraintStart_toStartOf="@id/form_person_cpf"
+                app:layout_constraintEnd_toEndOf="@id/form_person_cpf"
+                android:text="@={viewModel.personBinding.phoneNumber}"
+                />
+
+            <TextView
+                android:id="@+id/form_person_text_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                app:layout_constraintStart_toStartOf="@id/form_person_text_phone_number"
+                app:layout_constraintTop_toBottomOf="@id/form_person_phone_number"
+                />
+
+            <EditText
+                android:id="@+id/form_person_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/form_person_phone_number"
+                app:layout_constraintTop_toBottomOf="@id/form_person_text_email"
+                app:layout_constraintEnd_toEndOf="@id/form_person_phone_number"
+                android:text="@={viewModel.personBinding.email}"
+                />
+
+            <TextView
+                android:id="@+id/form_person_text_explain_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/texto_preencher_email"
+                app:layout_constraintStart_toStartOf="@id/form_person_email"
+                app:layout_constraintTop_toBottomOf="@id/form_person_email"
+                />
+
+            <TextView
+                android:id="@+id/form_person_text_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/exibir_campos"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintTop_toBottomOf="@id/form_person_text_explain_email"
+                app:layout_constraintStart_toStartOf="@+id/form_person_phone_number"
+                app:layout_constraintEnd_toStartOf="@id/form_person_switch_address"
+                android:layout_marginTop="16dp"
+                />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/form_person_switch_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/form_person_text_address"
+                app:layout_constraintTop_toTopOf="@id/form_person_text_address"
+                app:layout_constraintEnd_toEndOf="@id/form_person_email"
+                app:layout_constraintBottom_toBottomOf="@id/form_person_text_address"
+                android:onCheckedChanged="@{(switch, checked) -> viewModel.onSwitchAdressClick(checked)}"
+                 />
+
+            <TextView
+                android:id="@+id/form_person_text_street"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/endereco"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="@id/form_person_text_address"
+                app:layout_constraintTop_toBottomOf="@id/form_person_text_address"
+                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                />
+
+            <EditText
+                android:id="@+id/form_person_street"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/form_person_email"
+                app:layout_constraintEnd_toEndOf="@id/form_person_email"
+                app:layout_constraintTop_toTopOf="@id/form_person_text_street"
+                android:text="@={viewModel.personBinding.street}"
+                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                />
+
+            <TextView
+                android:id="@+id/form_person_text_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number"
+                app:layout_constraintStart_toStartOf="@id/form_person_street"
+                app:layout_constraintTop_toBottomOf="@id/form_person_street"
+                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                />
+
+            <EditText
+                android:id="@+id/form_person_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/form_person_text_number"
+                app:layout_constraintTop_toBottomOf="@id/form_person_text_number"
+                app:layout_constraintEnd_toStartOf="@id/form_person_complement"
+                android:text="@={viewModel.personBinding.number}"
+                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                />
+
+            <TextView
+                android:id="@+id/form_person_text_complement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/complemento"
+                app:layout_constraintStart_toEndOf="@+id/form_person_text_number"
+                app:layout_constraintTop_toTopOf="@id/form_person_text_number"
+                app:layout_constraintEnd_toEndOf="@id/form_person_street"
+                app:layout_constraintHorizontal_bias="0.35"
+                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                />
+
+            <EditText
+                android:id="@+id/form_person_complement"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/form_person_street"
+                app:layout_constraintStart_toStartOf="@id/form_person_text_complement"
+                app:layout_constraintBottom_toBottomOf="@id/form_person_number"
+                android:text="@={viewModel.personBinding.complement}"
+                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                />
+
+            <TextView
+                android:id="@+id/form_person_text_neighborhood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bairro"
+                app:layout_constraintStart_toStartOf="@id/form_person_number"
+                app:layout_constraintTop_toBottomOf="@id/form_person_number"
+                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                />
+
+            <EditText
+                android:id="@+id/form_person_neighborhood"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/form_person_text_neighborhood"
+                app:layout_constraintTop_toBottomOf="@id/form_person_text_neighborhood"
+                app:layout_constraintEnd_toStartOf="@id/form_person_cep"
+                android:text="@={viewModel.personBinding.neighborhood}"
+                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                />
+
+            <TextView
+                android:id="@+id/form_person_text_cep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cep"
+                app:layout_constraintStart_toEndOf="@+id/form_person_text_neighborhood"
+                app:layout_constraintTop_toTopOf="@id/form_person_text_neighborhood"
+                app:layout_constraintStart_toStartOf="@id/form_person_text_complement"
+                app:layout_constraintHorizontal_bias="0.35"
+                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                />
+
+            <EditText
+                android:id="@+id/form_person_cep"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/form_person_complement"
+                app:layout_constraintStart_toStartOf="@id/form_person_text_complement"
+                app:layout_constraintBottom_toBottomOf="@id/form_person_neighborhood"
+                android:hint="@string/ex_cep"
+                android:text="@={viewModel.personBinding.zipcode}"
+                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                />
+
+            <TextView
+                android:id="@+id/form_person_text_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado"
+                app:layout_constraintStart_toStartOf="@id/form_person_neighborhood"
+                app:layout_constraintTop_toBottomOf="@+id/form_person_neighborhood"
+                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                />
+
+            <Spinner
+                android:id="@+id/form_person_state"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/form_person_text_state"
+                app:layout_constraintStart_toStartOf="@id/form_person_text_state"
+                app:layout_constraintEnd_toEndOf="@id/form_person_complement"
+                android:entries="@array/states_array"
+                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                />
+
+
+            <Button
+                android:id="@+id/form_person_button_back"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/form_person_state"
+                app:layout_constraintStart_toStartOf="@id/form_person_email"
+                app:layout_constraintEnd_toStartOf="@id/form_person_button_next"
+                app:layout_constraintBottom_toBottomOf="@id/form_person_button_next"
+                android:layout_marginEnd="4dp"
+                android:text="@string/voltar"
+                />
+
+            <Button
+                android:id="@+id/form_person_button_next"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/form_person_email"
+                app:layout_constraintTop_toTopOf="@id/form_person_button_back"
+                app:layout_constraintStart_toEndOf="@id/form_person_button_back"
+                android:layout_marginLeft="4dp"
+                android:text="@string/avancar"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>

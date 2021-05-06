@@ -4,12 +4,15 @@ import android.content.Context
 import com.example.geradorboletos.MainActivity
 import com.example.geradorboletos.database.di.DatabaseModule
 import com.example.geradorboletos.retrofit.di.RetrofitModule
+import com.example.geradorboletos.ui.form_person.di.FormPersonComponent
 import dagger.BindsInstance
 import dagger.Component
+import dagger.Module
 import javax.inject.Singleton
 
+
 @Singleton
-@Component(modules = [RetrofitModule::class, DatabaseModule::class])
+@Component(modules = [RetrofitModule::class, DatabaseModule::class, SubComponentsModule::class])
 interface ApplicationComponent {
 
     @Component.Factory
@@ -17,6 +20,11 @@ interface ApplicationComponent {
         fun create(@BindsInstance applicationContext: Context) : ApplicationComponent
     }
 
+    fun formPersonComponent(): FormPersonComponent.Factory
+
     fun inject(mainActivity: MainActivity)
 
 }
+
+@Module(subcomponents = [FormPersonComponent::class])
+object SubComponentsModule

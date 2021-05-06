@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">GeradorBoletos</string>
+    <string name="para_quem">Para Quem?</string>
+    <string name="pessoa_fisica">Pessoa Física</string>
+    <string name="nome_completo">Nome Completo</string>
+    <string name="nome_exemplo">Ex.: João Paulo Oliveira</string>
+    <string name="pessoa_juridica">Pessoa Jurídica</string>
+    <string name="cpf">CPF</string>
+    <string name="ex_cpf">Ex. : 000.000.000-00</string>
+    <string name="razao_social">Razão Social</string>
+    <string name="cnpj">CNPJ</string>
+    <string name="ex_cnpj">Ex.: 00.000.000/0000-00</string>
+    <string name="celular">Celular</string>
+    <string name="ex_telefone">Ex.: (00) 9 0000-0000</string>
+    <string name="email">Email</string>
+    <string name="texto_preencher_email">Ao preencher o e-mail o boleto será encaminhado automaticamente para o cliente</string>
+    <string name="exibir_campos">Exibir campos adicionais</string>
+    <string name="endereco">Endereço (Logradouro/Rua/Avenida)</string>
+    <string name="number">Número</string>
+    <string name="complemento">Complemento</string>
+    <string name="bairro">Bairro</string>
+    <string name="cep">CEP</string>
+    <string name="ex_cep">Ex.: 00000-000</string>
+    <string name="voltar">Voltar</string>
+    <string name="avancar">Avançar</string>
 </resources>

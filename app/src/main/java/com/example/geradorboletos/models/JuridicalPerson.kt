@@ -1,10 +1,10 @@
-package com.example.geradorboletos.model
+package com.example.geradorboletos.models
 
 import com.google.gson.annotations.SerializedName
 
 class JuridicalPerson(
-    private val cnpj: String,
+    val cnpj: String,
     @SerializedName("corporate_name")
-    private val corporateName: String
+    val corporateName: String
 ) {
 }

@@ -9,6 +9,7 @@ class GeradorBoletosDatabaseConstants private constructor(){
 
     object Tables {
         const val PERSON_TABLE = "person"
+        const val ITEM_TABLE = "item"
     }
 
 }

@@ -38,8 +38,17 @@ android {
 
 dependencies {
 
+    // ViewModel
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+
+    def room_version = "2.3.0"
     // Room
-    implementation "androidx.room:room-runtime:2.3.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
 
     // Dagger2 Dependencies
     def dagger_version = "2.27"
@@ -47,11 +56,11 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     // Lifecycle components
-    def lifecycle_version = "2.1.0"
+    def lifecycle_version = "2.2.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
     // Navigation
-    def nav_version = "2.1.0"
+    def nav_version = "2.3.5"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 

@@ -1,6 +1,6 @@
 package com.example.geradorboletos.retrofit.service
 
-import com.example.geradorboletos.model.TokenModel
+import com.example.geradorboletos.models.Token
 import com.example.geradorboletos.retrofit.RetrofitConstants
 import com.example.geradorboletos.retrofit.body.GrantType
 import retrofit2.Call
@@ -11,6 +11,6 @@ import retrofit2.http.POST
 interface AutenticateService {
 
     @POST(RetrofitConstants.URL.AUTHORIZE)
-    fun autenticate(@Header("Authorization") credentials: String, @Body grant_type: GrantType): Call<TokenModel>
+    fun autenticate(@Header("Authorization") credentials: String, @Body grant_type: GrantType): Call<Token>
 
 }
