@@ -6,5 +6,17 @@
     <fragment
         android:id="@+id/formPersonFragment"
         android:name="com.example.geradorboletos.ui.form_person.FormPersonFragment"
-        android:label="FormPersonFragment" />
+        android:label="FormPersonFragment" >
+        <action
+            android:id="@+id/action_formPersonFragment_to_addItemsFragment"
+            app:destination="@id/addItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addItemsFragment"
+        android:name="com.example.geradorboletos.ui.add_items.AddItemsFragment"
+        android:label="AddItemsFragment" >
+        <argument
+            android:name="person"
+            app:argType="com.example.geradorboletos.models.Person" />
+    </fragment>
 </navigation>

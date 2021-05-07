@@ -2,6 +2,7 @@ package com.example.geradorboletos.models
 
 import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 class Person(
     val name: String? = null,
@@ -14,6 +15,6 @@ class Person(
     val juridicalPerson: JuridicalPerson? = null,
     @Embedded
     val address: Adress? = null
-) {
+) : Serializable {
 
 }

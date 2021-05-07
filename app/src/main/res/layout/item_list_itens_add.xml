@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.example.geradorboletos.models.Item" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/item_text_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/descricao"
+            />
+
+        <TextView
+            android:id="@+id/item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/item_text_description"
+            app:layout_constraintTop_toTopOf="@id/item_text_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.20"
+            tools:text="Playstation"
+            android:text="@{item.name}"
+            />
+
+        <TextView
+            android:id="@+id/item_text_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/item_text_description"
+            app:layout_constraintTop_toBottomOf="@id/item_text_description"
+            android:text="@string/valor"
+            />
+
+        <TextView
+            android:id="@+id/item_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/item_description"
+            app:layout_constraintTop_toTopOf="@id/item_text_value"
+            android:text="@{Integer.toString(item.value)}"
+            tools:text="R$ 1000,00"/>
+<!--            android:text="@{item.value}"-->
+
+
+        <TextView
+            android:id="@+id/item_text_qtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/item_text_value"
+            app:layout_constraintTop_toBottomOf="@id/item_text_value"
+            android:text="@string/quantidade_value"
+            />
+
+        <TextView
+            android:id="@+id/item_qtd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/item_value"
+            app:layout_constraintTop_toBottomOf="@id/item_value"
+            android:text="@{Integer.toString(item.amount)}"
+            tools:text="1"/>
+<!--            android:text="@{item.amount}"-->
+
+
+        <TextView
+            android:id="@+id/item_text_subtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/item_text_qtd"
+            app:layout_constraintTop_toBottomOf="@id/item_text_qtd"
+            android:text="@string/subtotal"
+            />
+
+        <TextView
+            android:id="@+id/item_subtotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/item_qtd"
+            app:layout_constraintTop_toBottomOf="@id/item_qtd"
+            android:text="@{Integer.toString(item.amount * item.value)}"
+            tools:text="R$ 1000,00"/>
+        <!--            android:text="@{(item.amount * item.value)}"-->
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

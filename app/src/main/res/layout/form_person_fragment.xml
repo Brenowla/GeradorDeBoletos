@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.example.geradorboletos.ui.form_person.FormPersonViewModel" />
+
+        <variable
+            name="toAddItems"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <ScrollView
@@ -39,6 +43,7 @@
                 android:text="@string/pessoa_fisica"
                 android:backgroundTint="@color/white"
                 android:textColor="#1B4D68"
+                android:onClick="@{() -> viewModel.switchIsJuridical(false)}"
                 />
 
             <Button
@@ -51,7 +56,8 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/form_person_button_fisical_person"
-                app:layout_constraintTop_toTopOf="@+id/form_person_button_fisical_person" />
+                app:layout_constraintTop_toTopOf="@+id/form_person_button_fisical_person"
+                android:onClick="@{() -> viewModel.switchIsJuridical(true)}"/>
 
             <TextView
                 android:id="@+id/form_person_text_full_name"
@@ -105,57 +111,70 @@
                 app:layout_constraintEnd_toEndOf="@id/form_person_full_name"
                 android:text="@={viewModel.personBinding.cpf}"
                 />
-            
-            <TextView
-                android:id="@+id/form_person_text_corporate_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/razao_social"
-                app:layout_constraintTop_toBottomOf="@+id/form_person_cpf"
-                app:layout_constraintStart_toStartOf="@id/form_person_cpf"
-                android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
-                />
 
-            <EditText
-                android:id="@+id/form_person_corporate_name"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/form_person_juridical_person_group"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/form_person_cpf"
                 app:layout_constraintEnd_toEndOf="@id/form_person_cpf"
-                app:layout_constraintTop_toBottomOf="@id/form_person_text_corporate_name"
-                android:text="@={viewModel.personBinding.corporateName}"
-                android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
-                />
+                app:layout_constraintTop_toBottomOf="@id/form_person_cpf"
+                >
 
-            <TextView
-                android:id="@+id/form_person_text_cnpj"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cnpj"
-                app:layout_constraintTop_toBottomOf="@id/form_person_corporate_name"
-                app:layout_constraintStart_toStartOf="@id/form_person_corporate_name"
-                android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
-                />
+                <TextView
+                    android:id="@+id/form_person_text_corporate_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/razao_social"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
+                    />
 
-            <EditText
-                android:id="@+id/form_person_cnpj"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/ex_cnpj"
-                app:layout_constraintStart_toStartOf="@id/form_person_corporate_name"
-                app:layout_constraintEnd_toEndOf="@id/form_person_corporate_name"
-                app:layout_constraintTop_toBottomOf="@id/form_person_text_cnpj"
-                android:text="@={viewModel.personBinding.cnpj}"
-                android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
-                />
+                <EditText
+                    android:id="@+id/form_person_corporate_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/form_person_text_corporate_name"
+                    android:text="@={viewModel.personBinding.corporateName}"
+                    android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
+                    />
+
+                <TextView
+                    android:id="@+id/form_person_text_cnpj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cnpj"
+                    app:layout_constraintTop_toBottomOf="@id/form_person_corporate_name"
+                    app:layout_constraintStart_toStartOf="@id/form_person_corporate_name"
+                    android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
+                    />
+
+                <EditText
+                    android:id="@+id/form_person_cnpj"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/ex_cnpj"
+                    app:layout_constraintStart_toStartOf="@id/form_person_corporate_name"
+                    app:layout_constraintEnd_toEndOf="@id/form_person_corporate_name"
+                    app:layout_constraintTop_toBottomOf="@id/form_person_text_cnpj"
+                    android:text="@={viewModel.personBinding.cnpj}"
+                    android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
             <TextView
                 android:id="@+id/form_person_text_phone_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/celular"
-                app:layout_constraintStart_toStartOf="@id/form_person_cnpj"
-                app:layout_constraintTop_toBottomOf="@id/form_person_cnpj"
+                app:layout_constraintStart_toStartOf="@id/form_person_juridical_person_group"
+                app:layout_constraintTop_toBottomOf="@id/form_person_juridical_person_group"
                 />
 
             <EditText
@@ -220,144 +239,157 @@
                 android:onCheckedChanged="@{(switch, checked) -> viewModel.onSwitchAdressClick(checked)}"
                  />
 
-            <TextView
-                android:id="@+id/form_person_text_street"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/endereco"
-                android:layout_marginTop="24dp"
-                app:layout_constraintStart_toStartOf="@id/form_person_text_address"
-                app:layout_constraintTop_toBottomOf="@id/form_person_text_address"
-                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                />
-
-            <EditText
-                android:id="@+id/form_person_street"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/form_person_address_group"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@id/form_person_email"
                 app:layout_constraintEnd_toEndOf="@id/form_person_email"
-                app:layout_constraintTop_toTopOf="@id/form_person_text_street"
-                android:text="@={viewModel.personBinding.street}"
-                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                />
+                app:layout_constraintTop_toBottomOf="@id/form_person_text_address"
+                >
 
-            <TextView
-                android:id="@+id/form_person_text_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/number"
-                app:layout_constraintStart_toStartOf="@id/form_person_street"
-                app:layout_constraintTop_toBottomOf="@id/form_person_street"
-                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                />
+                <TextView
+                    android:id="@+id/form_person_text_street"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/endereco"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                    />
 
-            <EditText
-                android:id="@+id/form_person_number"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/form_person_text_number"
-                app:layout_constraintTop_toBottomOf="@id/form_person_text_number"
-                app:layout_constraintEnd_toStartOf="@id/form_person_complement"
-                android:text="@={viewModel.personBinding.number}"
-                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                />
+                <EditText
+                    android:id="@+id/form_person_street"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/form_person_text_street"
+                    android:text="@={viewModel.personBinding.street}"
+                    android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                    />
 
-            <TextView
-                android:id="@+id/form_person_text_complement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/complemento"
-                app:layout_constraintStart_toEndOf="@+id/form_person_text_number"
-                app:layout_constraintTop_toTopOf="@id/form_person_text_number"
-                app:layout_constraintEnd_toEndOf="@id/form_person_street"
-                app:layout_constraintHorizontal_bias="0.35"
-                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                />
+                <TextView
+                    android:id="@+id/form_person_text_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number"
+                    app:layout_constraintStart_toStartOf="@id/form_person_street"
+                    app:layout_constraintTop_toBottomOf="@id/form_person_street"
+                    android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                    />
 
-            <EditText
-                android:id="@+id/form_person_complement"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/form_person_street"
-                app:layout_constraintStart_toStartOf="@id/form_person_text_complement"
-                app:layout_constraintBottom_toBottomOf="@id/form_person_number"
-                android:text="@={viewModel.personBinding.complement}"
-                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                />
+                <EditText
+                    android:id="@+id/form_person_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/form_person_text_number"
+                    app:layout_constraintTop_toBottomOf="@id/form_person_text_number"
+                    app:layout_constraintEnd_toStartOf="@id/form_person_complement"
+                    android:text="@={viewModel.personBinding.number}"
+                    android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                    />
 
-            <TextView
-                android:id="@+id/form_person_text_neighborhood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bairro"
-                app:layout_constraintStart_toStartOf="@id/form_person_number"
-                app:layout_constraintTop_toBottomOf="@id/form_person_number"
-                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                />
+                <TextView
+                    android:id="@+id/form_person_text_complement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/complemento"
+                    app:layout_constraintStart_toEndOf="@+id/form_person_text_number"
+                    app:layout_constraintTop_toTopOf="@id/form_person_text_number"
+                    app:layout_constraintEnd_toEndOf="@id/form_person_street"
+                    app:layout_constraintHorizontal_bias="0.35"
+                    android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                    />
 
-            <EditText
-                android:id="@+id/form_person_neighborhood"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/form_person_text_neighborhood"
-                app:layout_constraintTop_toBottomOf="@id/form_person_text_neighborhood"
-                app:layout_constraintEnd_toStartOf="@id/form_person_cep"
-                android:text="@={viewModel.personBinding.neighborhood}"
-                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                />
+                <EditText
+                    android:id="@+id/form_person_complement"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/form_person_street"
+                    app:layout_constraintStart_toStartOf="@id/form_person_text_complement"
+                    app:layout_constraintBottom_toBottomOf="@id/form_person_number"
+                    android:text="@={viewModel.personBinding.complement}"
+                    android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                    />
 
-            <TextView
-                android:id="@+id/form_person_text_cep"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cep"
-                app:layout_constraintStart_toEndOf="@+id/form_person_text_neighborhood"
-                app:layout_constraintTop_toTopOf="@id/form_person_text_neighborhood"
-                app:layout_constraintStart_toStartOf="@id/form_person_text_complement"
-                app:layout_constraintHorizontal_bias="0.35"
-                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                />
+                <TextView
+                    android:id="@+id/form_person_text_neighborhood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bairro"
+                    app:layout_constraintStart_toStartOf="@id/form_person_number"
+                    app:layout_constraintTop_toBottomOf="@id/form_person_number"
+                    android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                    />
 
-            <EditText
-                android:id="@+id/form_person_cep"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@id/form_person_complement"
-                app:layout_constraintStart_toStartOf="@id/form_person_text_complement"
-                app:layout_constraintBottom_toBottomOf="@id/form_person_neighborhood"
-                android:hint="@string/ex_cep"
-                android:text="@={viewModel.personBinding.zipcode}"
-                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                />
+                <EditText
+                    android:id="@+id/form_person_neighborhood"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/form_person_text_neighborhood"
+                    app:layout_constraintTop_toBottomOf="@id/form_person_text_neighborhood"
+                    app:layout_constraintEnd_toStartOf="@id/form_person_cep"
+                    android:text="@={viewModel.personBinding.neighborhood}"
+                    android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                    />
 
-            <TextView
-                android:id="@+id/form_person_text_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Estado"
-                app:layout_constraintStart_toStartOf="@id/form_person_neighborhood"
-                app:layout_constraintTop_toBottomOf="@+id/form_person_neighborhood"
-                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                />
+                <TextView
+                    android:id="@+id/form_person_text_cep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cep"
+                    app:layout_constraintStart_toEndOf="@+id/form_person_text_neighborhood"
+                    app:layout_constraintTop_toTopOf="@id/form_person_text_neighborhood"
+                    app:layout_constraintStart_toStartOf="@id/form_person_text_complement"
+                    app:layout_constraintHorizontal_bias="0.35"
+                    android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                    />
 
-            <Spinner
-                android:id="@+id/form_person_state"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/form_person_text_state"
-                app:layout_constraintStart_toStartOf="@id/form_person_text_state"
-                app:layout_constraintEnd_toEndOf="@id/form_person_complement"
-                android:entries="@array/states_array"
-                android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                />
+                <EditText
+                    android:id="@+id/form_person_cep"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/form_person_complement"
+                    app:layout_constraintStart_toStartOf="@id/form_person_text_complement"
+                    app:layout_constraintBottom_toBottomOf="@id/form_person_neighborhood"
+                    android:hint="@string/ex_cep"
+                    android:text="@={viewModel.personBinding.zipcode}"
+                    android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                    />
+
+                <TextView
+                    android:id="@+id/form_person_text_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Estado"
+                    app:layout_constraintStart_toStartOf="@id/form_person_neighborhood"
+                    app:layout_constraintTop_toBottomOf="@+id/form_person_neighborhood"
+                    android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                    />
+
+                <Spinner
+                    android:id="@+id/form_person_state"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/form_person_text_state"
+                    app:layout_constraintStart_toStartOf="@id/form_person_text_state"
+                    app:layout_constraintEnd_toEndOf="@id/form_person_complement"
+                    android:entries="@array/states_array"
+                    android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
             <Button
                 android:id="@+id/form_person_button_back"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/form_person_state"
+                app:layout_constraintTop_toBottomOf="@id/form_person_address_group"
                 app:layout_constraintStart_toStartOf="@id/form_person_email"
                 app:layout_constraintEnd_toStartOf="@id/form_person_button_next"
                 app:layout_constraintBottom_toBottomOf="@id/form_person_button_next"
@@ -374,6 +406,7 @@
                 app:layout_constraintStart_toEndOf="@id/form_person_button_back"
                 android:layout_marginLeft="4dp"
                 android:text="@string/avancar"
+                android:onClick="@{toAddItems}"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

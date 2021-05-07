@@ -12,23 +12,20 @@ class FormPersonViewModel @Inject constructor() : ViewModel() {
         PersonBinding(Person())
     }
     val isJuridical: MutableLiveData<Boolean> = MutableLiveData<Boolean>().also {
-        it.value = true
+        it.value = false
     }
     val hasAdress: MutableLiveData<Boolean> = MutableLiveData<Boolean>().also {
         it.value = false
     }
 
-
     fun onSwitchAdressClick(checked: Boolean){
         hasAdress.value = checked
     }
 
-    fun onClickFisical(){
-
+    fun switchIsJuridical(change: Boolean){
+        isJuridical.value = change
     }
 
-    fun onClickJuridical(){
-
-    }
+    fun getPerson() = personBinding.toPerson(isJuridical = isJuridical.value?:false, hasAdress = hasAdress.value?:false)
 
 }

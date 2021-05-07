@@ -1,7 +1,6 @@
 package com.example.geradorboletos
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.geradorboletos.databinding.ActivityMainBinding
 import com.example.geradorboletos.models.*
@@ -9,11 +8,9 @@ import com.example.geradorboletos.repositories.autentication.AutenticationReposi
 import com.example.geradorboletos.repositories.database.ItemRepository
 import com.example.geradorboletos.repositories.database.PersonRepository
 import com.example.geradorboletos.repositories.retrofit.ChargeRepository
-import com.example.geradorboletos.retrofit.callback.BaseCallback
 import com.example.geradorboletos.session.SessionManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -54,16 +51,16 @@ class MainActivity : AppCompatActivity() {
         val payment = Payment(bankingBillet)
         val charge = Charge(items,payment)
 
-        autenticationRepository.autenticate(object : BaseCallback.ResponseCallback<Token> {
-            override fun inSucess(result: Token) {
-//                Toast.makeText(this@MainActivity, result.accessToken, Toast.LENGTH_LONG).show()
-                sessionManager.saveAuthToken(result.accessToken)
-            }
-            override fun inFailure(error: String) {
-                Log.i("Erro", error)
-            }
-
-        })
+//        autenticationRepository.autenticate(object : BaseCallback.ResponseCallback<Token> {
+//            override fun inSucess(result: Token) {
+////                Toast.makeText(this@MainActivity, result.accessToken, Toast.LENGTH_LONG).show()
+//                sessionManager.saveAuthToken(result.accessToken)
+//            }
+//            override fun inFailure(error: String) {
+//                Log.i("Erro", error)
+//            }
+//
+//        })
 //        chargeRepository.makeCharge(charge, object : BaseCallback.ResponseCallback<ChargeResponse> {
 //            override fun inSucess(result: ChargeResponse) {
 //                Toast.makeText(this@MainActivity, result.chargeId.toString(), Toast.LENGTH_LONG).show()
@@ -74,15 +71,15 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        })
 
-        scope.launch {
-            personRepository.savePerson(PersonData(person))
-            Log.i("Pós de verdade", "onCreate: Adicionou Pessoa")
-        }
-
-        scope.launch {
-            itemRepository.saveItem(items)
-            Log.i("Pós de verdade", "onCreate: Adicionou Items")
-        }
+//        scope.launch {
+//            personRepository.savePerson(PersonData(person))
+//            Log.i("Pós de verdade", "onCreate: Adicionou Pessoa")
+//        }
+//
+//        scope.launch {
+//            itemRepository.saveItem(items)
+//            Log.i("Pós de verdade", "onCreate: Adicionou Items")
+//        }
 
 
     }

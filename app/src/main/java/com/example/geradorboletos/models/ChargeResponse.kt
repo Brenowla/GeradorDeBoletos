@@ -1,6 +1,7 @@
 package com.example.geradorboletos.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 class ChargeResponse(
     val code: Int,
@@ -12,7 +13,7 @@ class ChargeResponse(
     val status: String,
     val total: Int,
     val payment: String
-) {
+) : Serializable {
 }
 
 class Data(
