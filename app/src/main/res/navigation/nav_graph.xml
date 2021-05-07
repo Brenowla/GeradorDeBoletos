@@ -18,5 +18,19 @@
         <argument
             android:name="person"
             app:argType="com.example.geradorboletos.models.Person" />
+        <action
+            android:id="@+id/action_addItemsFragment_to_aditionalInformationFragment"
+            app:destination="@id/aditionalInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aditionalInformationFragment"
+        android:name="com.example.geradorboletos.ui.aditional_information.AditionalInformationFragment"
+        android:label="AditionalInformationFragment" >
+        <argument
+            android:name="person"
+            app:argType="com.example.geradorboletos.models.Person" />
+        <argument
+            android:name="items"
+            app:argType="com.example.geradorboletos.models.Item[]" />
     </fragment>
 </navigation>

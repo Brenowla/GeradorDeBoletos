@@ -16,11 +16,15 @@ class AddItemsViewModel @Inject constructor(context: Context) : ViewModel() {
     }
     var listSize = 0
 
-    fun additem() {
+    fun addItem() {
         listItems.add(itemBinding.toItem())
         listItemsData.value = listItems
         itemBinding.update(Item())
         listSize = listItems.size
+    }
+
+    fun getLista() : List<Item> {
+        return listItems
     }
 
 }

@@ -6,7 +6,6 @@ import java.io.Serializable
 class BankingBillet(
     val customer: Person,
     @SerializedName("expire_at")
-    val expireAt: String
-
+    val expireAt: String = ""
 ) : Serializable {
 }

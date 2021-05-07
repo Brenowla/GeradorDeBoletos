@@ -35,4 +35,6 @@
     <string name="valor">Valor:</string>
     <string name="quantidade_value">Quantidade:</string>
     <string name="subtotal">Subtotal:</string>
+    <string name="defina_o_vencimento">Defina o vencimento</string>
+    <string name="valor_total_da_cobranca">Valor Total da cobrança:</string>
 </resources>

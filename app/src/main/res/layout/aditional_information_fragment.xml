@@ -1,13 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.AditionalInformationFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.geradorboletos.ui.aditional_information.AditionalInformationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/adtional_information_text_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/defina_o_vencimento"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"
+            />
+
+        <EditText
+            android:id="@+id/aditional_information_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/adtional_information_text_data"
+            app:layout_constraintStart_toStartOf="@id/adtional_information_text_data"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:text="@={viewModel.bankingBilletData.expireAt}"
+            />
+
+        <TextView
+            android:id="@+id/aditional_information_text_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/valor_total_da_cobranca"
+            app:layout_constraintBottom_toTopOf="@id/aditional_information_button_back"
+            app:layout_constraintStart_toStartOf="@id/aditional_information_data"
+            app:layout_constraintEnd_toStartOf="@id/aditional_information_value"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/aditional_information_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/aditional_information_text_value"
+            app:layout_constraintStart_toEndOf="@id/aditional_information_text_value"
+
+            />
+
+        <Button
+            android:id="@+id/aditional_information_button_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/aditional_information_text_value"
+            app:layout_constraintEnd_toStartOf="@id/aditional_information_button_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="4dp"
+            android:text="@string/voltar"
+            />
+
+        <Button
+            android:id="@+id/aditional_information_button_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/aditional_information_data"
+            app:layout_constraintTop_toTopOf="@id/aditional_information_button_back"
+            app:layout_constraintStart_toEndOf="@id/aditional_information_button_back"
+            android:layout_marginLeft="4dp"
+            android:text="@string/avancar"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

@@ -13,6 +13,10 @@
         <variable
             name="addItemListener"
             type="android.view.View.OnClickListener" />
+
+        <variable
+            name="toAditionalItems"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -128,7 +132,8 @@
             android:text="@string/avancar"
             app:layout_constraintEnd_toEndOf="@id/add_items_scroll_items"
             app:layout_constraintStart_toEndOf="@id/add_items_button_back"
-            app:layout_constraintTop_toTopOf="@id/add_items_button_back" />
+            app:layout_constraintTop_toTopOf="@id/add_items_button_back"
+            android:onClick="@{toAditionalItems}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

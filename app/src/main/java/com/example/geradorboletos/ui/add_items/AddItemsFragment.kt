@@ -7,10 +7,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.geradorboletos.GeradorBoletosApp
 import com.example.geradorboletos.R
 import com.example.geradorboletos.databinding.AddItemsFragmentBinding
@@ -20,6 +21,14 @@ import javax.inject.Inject
 class AddItemsFragment : Fragment() {
 
     lateinit var binding : AddItemsFragmentBinding
+
+    private val controler by lazy {
+        findNavController()
+    }
+    private val arguments by navArgs<AddItemsFragmentArgs>()
+    private val person by lazy {
+        arguments.person
+    }
 
     @Inject
     lateinit var viewModel: AddItemsViewModel
@@ -46,11 +55,23 @@ class AddItemsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.addItemListener = View.OnClickListener { dialogFormItens() }
+        binding.toAditionalItems = View.OnClickListener { toAditionalInformation() }
         binding.addItemsLista.adapter = adapter
 
         viewModel.listItemsData.observe(viewLifecycleOwner, Observer {
             adapter.changeList(it)
         })
+
+
+    }
+
+    private fun toAditionalInformation() {
+        AddItemsFragmentDirections.actionAddItemsFragmentToAditionalInformationFragment(person,
+            viewModel.getLista().toTypedArray()
+        ).run {
+            controler.navigate(this)
+        }
+
     }
 
     private fun dialogFormItens () {
@@ -60,10 +81,9 @@ class AddItemsFragment : Fragment() {
         builder.setTitle(getString(R.string.add_item))
         builder.setView(dialogBinding.root)
         builder.setPositiveButton("Adicionar") { dialogInterface: DialogInterface, i: Int ->
-            viewModel.additem()
+            viewModel.addItem()
         }
         builder.setNegativeButton("Cancelar"){ dialogInterface: DialogInterface, i: Int ->
-            Toast.makeText(context, "Saiu", Toast.LENGTH_SHORT).show()
         }
         val dialog: AlertDialog = builder.create()
         dialog.show()
