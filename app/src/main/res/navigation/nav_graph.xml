@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/formPersonFragment">
 
     <fragment
@@ -29,6 +31,21 @@
         <argument
             android:name="person"
             app:argType="com.example.geradorboletos.models.Person" />
+        <argument
+            android:name="items"
+            app:argType="com.example.geradorboletos.models.Item[]" />
+        <action
+            android:id="@+id/action_aditionalInformationFragment_to_sendChargeFragment"
+            app:destination="@id/sendChargeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sendChargeFragment"
+        android:name="com.example.geradorboletos.ui.send_charge.SendChargeFragment"
+        android:label="send_charge_fragment"
+        tools:layout="@layout/send_charge_fragment" >
+        <argument
+            android:name="bankingBillet"
+            app:argType="com.example.geradorboletos.models.BankingBillet" />
         <argument
             android:name="items"
             app:argType="com.example.geradorboletos.models.Item[]" />

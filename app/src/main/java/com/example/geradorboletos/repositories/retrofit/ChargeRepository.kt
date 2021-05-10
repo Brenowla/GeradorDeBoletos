@@ -8,8 +8,8 @@ import javax.inject.Inject
 
 class ChargeRepository @Inject constructor(private val chargeService: ChargeService) {
 
-    fun makeCharge(charge: Charge,responseCallback: BaseCallback.ResponseCallback<ChargeResponse>){
-        val call = chargeService.makeCharge(charge)
+    fun makeCharge(charge: Charge, token: String,responseCallback: BaseCallback.ResponseCallback<ChargeResponse>){
+        val call = chargeService.makeCharge(token,charge)
         call.enqueue(BaseCallback(responseCallback))
     }
 

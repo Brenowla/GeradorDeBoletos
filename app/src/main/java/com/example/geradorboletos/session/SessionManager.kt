@@ -11,6 +11,7 @@ class SessionManager @Inject constructor(context: Context) {
 
     companion object {
         const val AUTHORIZATION_TOKEN = "AuthToken"
+        const val CUSTOMER = "Customer"
     }
 
     fun saveAuthToken(token: String) {

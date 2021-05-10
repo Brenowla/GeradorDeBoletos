@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">GeradorBoletos</string>
-    <string name="para_quem">Para Quem?</string>
+    <string name="para_quem">Para quem?</string>
     <string name="pessoa_fisica">Pessoa Física</string>
     <string name="nome_completo">Nome Completo</string>
     <string name="nome_exemplo">Ex.: João Paulo Oliveira</string>
@@ -30,11 +30,14 @@
     <string name="valor_unitario">Valor unitário</string>
     <string name="quantidade">Quantidade</string>
     <string name="add_item">Adicionar um item</string>
-    <string name="carregar_item">Carregar item</string>
+    <string name="consultar_item">Consultar Item</string>
     <string name="descricao">Descrição:</string>
     <string name="valor">Valor:</string>
     <string name="quantidade_value">Quantidade:</string>
     <string name="subtotal">Subtotal:</string>
     <string name="defina_o_vencimento">Defina o vencimento</string>
     <string name="valor_total_da_cobranca">Valor Total da cobrança:</string>
+    <string name="emissao_boletos">Emissão de Boletos</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="adicionar">Adicionar</string>
 </resources>

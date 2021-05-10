@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:name=".GeradorBoletosApp"
         android:theme="@style/Theme.GeradorBoletos">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

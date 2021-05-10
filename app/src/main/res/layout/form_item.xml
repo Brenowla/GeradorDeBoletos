@@ -1,33 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.example.geradorboletos.ui.add_items.AddItemsViewModel" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="addItem"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="dismiss"
+            type="android.view.View.OnClickListener" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="8dp"
+        android:background="@drawable/dialog_card">
+
+        <ImageView
+            android:id="@+id/form_item_blue_bar"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:src="@color/secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/form_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{title}"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/form_item_blue_bar"
+            app:layout_constraintTop_toTopOf="@id/form_item_blue_bar"
+            app:layout_constraintBottom_toBottomOf="@id/form_item_blue_bar"
+            tools:text="Adicionar um item" />
 
         <TextView
             android:id="@+id/form_item_text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="@string/nome"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@id/form_item_title"
+            app:layout_constraintTop_toBottomOf="@id/form_item_blue_bar" />
 
         <EditText
             android:id="@+id/form_item_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:text="@={viewModel.itemBinding.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/form_item_text_name"
-            app:layout_constraintTop_toBottomOf="@id/form_item_text_name"
-            android:text="@={viewModel.itemBinding.name}"/>
+            app:layout_constraintTop_toBottomOf="@id/form_item_text_name" />
 
         <TextView
             android:id="@+id/form_item_text_value"
@@ -38,12 +78,14 @@
             app:layout_constraintTop_toBottomOf="@id/form_item_name" />
 
         <EditText
+            android:id="@+id/form_item_value"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="@={viewModel.itemBinding.value}"
             app:layout_constraintEnd_toStartOf="@+id/form_item_text_qtd"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/form_item_text_value"
-            app:layout_constraintTop_toBottomOf="@id/form_item_text_value"
-            android:text="@={viewModel.itemBinding.value}"/>
+            app:layout_constraintTop_toBottomOf="@id/form_item_text_value" />
 
         <TextView
             android:id="@+id/form_item_text_qtd"
@@ -51,18 +93,51 @@
             android:layout_height="wrap_content"
             android:text="@string/quantidade"
             app:layout_constraintEnd_toEndOf="@id/form_item_name"
-            app:layout_constraintHorizontal_bias="0.55"
+            app:layout_constraintHorizontal_bias="0.50"
             app:layout_constraintStart_toEndOf="@id/form_item_text_value"
             app:layout_constraintTop_toTopOf="@id/form_item_text_value" />
 
         <EditText
+            android:id="@+id/form_item_qtd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:text="@={viewModel.itemBinding.amount}"
             app:layout_constraintEnd_toEndOf="@id/form_item_name"
             app:layout_constraintStart_toStartOf="@id/form_item_text_qtd"
-            app:layout_constraintTop_toBottomOf="@id/form_item_text_qtd"
-            android:text="@={viewModel.itemBinding.amount}"/>
+            app:layout_constraintTop_toBottomOf="@id/form_item_text_qtd" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/form_item_button_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_negative_action"
+            android:fontFamily="@font/bebasneue_bold"
+            android:onClick="@{dismiss}"
+            android:text="@string/cancelar"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@id/form_item_button_next"
+            app:layout_constraintStart_toStartOf="@id/form_item_value"
+            app:layout_constraintTop_toBottomOf="@id/form_item_value"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/form_item_button_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/button_positive_active"
+            android:fontFamily="@font/bebasneue_bold"
+            android:onClick="@{addItem}"
+            android:text="@string/adicionar"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@id/form_item_qtd"
+            app:layout_constraintStart_toEndOf="@id/form_item_button_back"
+            app:layout_constraintTop_toTopOf="@id/form_item_button_back" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

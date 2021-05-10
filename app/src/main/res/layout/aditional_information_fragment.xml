@@ -3,9 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.example.geradorboletos.ui.aditional_information.AditionalInformationViewModel" />
+        <variable
+            name="toSendCharge"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +58,8 @@
 
             />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginBottom="8sp"
             android:id="@+id/aditional_information_button_back"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -63,9 +68,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginEnd="4dp"
             android:text="@string/voltar"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
+            android:background="@drawable/button_negative_action"
+            android:fontFamily="@font/bebasneue_bold"
             />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/aditional_information_button_next"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -74,6 +83,11 @@
             app:layout_constraintStart_toEndOf="@id/aditional_information_button_back"
             android:layout_marginLeft="4dp"
             android:text="@string/avancar"
+            android:onClick="@{toSendCharge}"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:background="@drawable/button_positive_active"
+            android:fontFamily="@font/bebasneue_bold"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

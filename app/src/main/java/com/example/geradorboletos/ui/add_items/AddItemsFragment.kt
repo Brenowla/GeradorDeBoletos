@@ -2,7 +2,6 @@ package com.example.geradorboletos.ui.add_items
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -62,7 +61,7 @@ class AddItemsFragment : Fragment() {
             adapter.changeList(it)
         })
 
-
+        activity?.title = getString(R.string.emissao_boletos)
     }
 
     private fun toAditionalInformation() {
@@ -77,15 +76,15 @@ class AddItemsFragment : Fragment() {
     private fun dialogFormItens () {
         val dialogBinding : FormItemBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.form_item, null, false)
         dialogBinding.viewModel = viewModel
+        dialogBinding.title = getString(R.string.add_item)
         val builder = AlertDialog.Builder(context)
-        builder.setTitle(getString(R.string.add_item))
         builder.setView(dialogBinding.root)
-        builder.setPositiveButton("Adicionar") { dialogInterface: DialogInterface, i: Int ->
-            viewModel.addItem()
-        }
-        builder.setNegativeButton("Cancelar"){ dialogInterface: DialogInterface, i: Int ->
-        }
         val dialog: AlertDialog = builder.create()
+        dialogBinding.addItem = View.OnClickListener {
+            viewModel.addItem()
+            dialog.dismiss()
+        }
+        dialogBinding.dismiss = View.OnClickListener { dialog.dismiss() }
         dialog.show()
     }
 

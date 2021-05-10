@@ -1,7 +1,6 @@
 package com.example.geradorboletos.retrofit.di
 
 import com.example.geradorboletos.retrofit.RetrofitConstants
-import com.example.geradorboletos.retrofit.interceptor.AuthInterceptor
 import com.example.geradorboletos.retrofit.service.AutenticateService
 import com.example.geradorboletos.retrofit.service.ChargeService
 import dagger.Module
@@ -22,11 +21,13 @@ class RetrofitModule {
     }
 
     @Provides
-    fun provideOkHttpClient(logging: HttpLoggingInterceptor, authInterceptor: AuthInterceptor): OkHttpClient {
+//    fun provideOkHttpClient(logging: HttpLoggingInterceptor, authInterceptor: AuthInterceptor): OkHttpClient {
+    fun provideOkHttpClient(logging: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(logging)
-            .addInterceptor(authInterceptor)
             .build()
+//            .addInterceptor(authInterceptor)
+
     }
 
     @Singleton

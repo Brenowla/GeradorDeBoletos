@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.geradorboletos.GeradorBoletosApp
+import com.example.geradorboletos.R
 import com.example.geradorboletos.databinding.FormPersonFragmentBinding
 import javax.inject.Inject
 
@@ -49,6 +50,8 @@ class FormPersonFragment : Fragment() {
         binding.toAddItems = View.OnClickListener {
             toAddItems()
         }
+
+        activity?.title = getString(R.string.emissao_boletos)
     }
 
     private fun toAddItems() {

@@ -36,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+
                 <TextView
                     android:id="@+id/add_items_text_what_to"
                     android:layout_width="wrap_content"
@@ -78,6 +79,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
                     app:layout_constraintTop_toBottomOf="@id/add_items_card"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -85,46 +87,62 @@
                     app:layout_constraintVertical_chainStyle="packed"
                     />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/add_items_button_add"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="12dp"
                     android:onClick="@{addItemListener}"
+                    android:textSize="18sp"
                     android:text="@string/adicionar_item"
                     app:layout_constraintEnd_toStartOf="@+id/add_item_button_search_item"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toStartOf="@+id/add_items_lista"
-                    app:layout_constraintTop_toBottomOf="@+id/add_items_lista" />
+                    app:layout_constraintTop_toBottomOf="@+id/add_items_lista"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_add_items"
+                    android:fontFamily="@font/myriadpro_semibold"/>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/add_item_button_search_item"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/carregar_item"
+                    android:text="@string/consultar_item"
                     app:layout_constraintEnd_toEndOf="@id/add_items_lista"
                     app:layout_constraintStart_toEndOf="@id/add_items_button_add"
-                    app:layout_constraintTop_toTopOf="@id/add_items_button_add" />
+                    app:layout_constraintTop_toTopOf="@id/add_items_button_add"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/button_add_items"
+                    android:fontFamily="@font/myriadpro_semibold"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/add_items_button_back"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/voltar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/add_items_button_next"
             app:layout_constraintStart_toStartOf="@id/add_items_scroll_items"
             app:layout_constraintTop_toBottomOf="@id/add_items_scroll_items"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
+            android:background="@drawable/button_negative_action"
+            android:fontFamily="@font/bebasneue_bold"
+            />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginEnd="8dp"
             android:id="@+id/add_items_button_next"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -133,7 +151,11 @@
             app:layout_constraintEnd_toEndOf="@id/add_items_scroll_items"
             app:layout_constraintStart_toEndOf="@id/add_items_button_back"
             app:layout_constraintTop_toTopOf="@id/add_items_button_back"
-            android:onClick="@{toAditionalItems}"/>
+            android:onClick="@{toAditionalItems}"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:background="@drawable/button_positive_active"
+            android:fontFamily="@font/bebasneue_bold"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
