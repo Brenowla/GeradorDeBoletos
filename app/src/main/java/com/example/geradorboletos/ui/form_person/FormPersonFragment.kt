@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.geradorboletos.GeradorBoletosApp
 import com.example.geradorboletos.R
 import com.example.geradorboletos.databinding.FormPersonFragmentBinding
+import com.example.geradorboletos.ui.utils.Mask
 import javax.inject.Inject
 
 class FormPersonFragment : Fragment() {
@@ -34,7 +35,7 @@ class FormPersonFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FormPersonFragmentBinding.inflate(inflater,container,false)
+        binding = FormPersonFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         return binding.root
@@ -43,15 +44,43 @@ class FormPersonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.personBinding.name.observe(viewLifecycleOwner, Observer {
-            if(it == "Breno"){
+            if (it == "Breno") {
                 Toast.makeText(activity, "Deu certo!", Toast.LENGTH_LONG).show()
             }
         })
         binding.toAddItems = View.OnClickListener {
             toAddItems()
         }
-
+        putMaskFields()
+        binding.verifications = verifications
         activity?.title = getString(R.string.emissao_boletos)
+    }
+
+    private fun putMaskFields() {
+        binding.formPersonCpf.addTextChangedListener(
+            Mask.mask(
+                "###.###.###-##",
+                editText = binding.formPersonCpf
+            )
+        )
+        binding.formPersonPhoneNumber.addTextChangedListener(
+            Mask.mask(
+                "(##) #####-####",
+                editText = binding.formPersonPhoneNumber
+            )
+        )
+        binding.formPersonCep.addTextChangedListener(
+            Mask.mask(
+                "#####-###",
+                editText = binding.formPersonCep
+            )
+        )
+        binding.formPersonCnpj.addTextChangedListener(
+            Mask.mask(
+                "##.###.###/####-##",
+                editText = binding.formPersonCnpj
+            )
+        )
     }
 
     private fun toAddItems() {
@@ -60,4 +89,24 @@ class FormPersonFragment : Fragment() {
                 controler.navigate(this)
             }
     }
+
+    private val verifications = object : View.OnFocusChangeListener {
+        override fun onFocusChange(v: View?, hasFocus: Boolean) {
+            if (!hasFocus) {
+                val result = when (v?.id) {
+                    binding.formPersonFullName.id -> {
+                        viewModel.verifyName()
+                    }
+                    else -> false
+                }
+                if (result) {
+                    v?.background?.setTint(resources.getColor(R.color.sucess))
+                } else {
+                    v?.background?.setTint(resources.getColor(R.color.error))
+                }
+            }
+        }
+
+    }
+
 }

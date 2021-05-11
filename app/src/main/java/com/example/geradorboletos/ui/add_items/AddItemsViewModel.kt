@@ -27,4 +27,27 @@ class AddItemsViewModel @Inject constructor(context: Context) : ViewModel() {
         return listItems
     }
 
+    fun setEditableItem(position: Int){
+        itemBinding.update(listItems[position])
+    }
+
+    fun getItemName(position: Int) : String {
+        return listItems[position].name
+    }
+
+    fun edit(position: Int): Boolean {
+        listItems[position] = itemBinding.toItem()
+        listItemsData.value = listItems
+        itemBinding.update(Item())
+        listSize = listItems.size
+        return true
+    }
+
+    fun delete(position: Int): Boolean {
+        listItems.removeAt(position)
+        listItemsData.value = listItems
+        listSize = listItems.size
+        return true
+    }
+
 }

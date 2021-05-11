@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.geradorboletos.models.Adress
 import com.example.geradorboletos.models.JuridicalPerson
 import com.example.geradorboletos.models.Person
+import com.example.geradorboletos.ui.utils.Mask
 
 class PersonBinding(
     private var person: Person,
@@ -67,7 +68,7 @@ class PersonBinding(
 
     fun toPerson(isJuridical: Boolean, hasAdress: Boolean): Person {
         val juridicalPerson = if (isJuridical) {
-            JuridicalPerson(cnpj = cnpj.value ?: "", corporateName = corporateName.value ?: "")
+            JuridicalPerson(cnpj = cnpj.value?.let { Mask.replaceChars(it) } ?: "", corporateName = corporateName.value ?: "")
         } else {
             null
         }
@@ -76,7 +77,7 @@ class PersonBinding(
                 street = street.value ?: "",
                 number = number.value ?: "",
                 neighborhood = neighborhood.value ?: "",
-                zipcode = zipcode.value ?: "",
+                zipcode = zipcode.value?.let { Mask.replaceChars(it) } ?: "",
                 city = city.value ?: "",
                 complement = if (complement.value == "") null else complement.value,
                 state = state.value ?: ""
@@ -86,8 +87,8 @@ class PersonBinding(
         }
         this.person = Person(
             name = name.value ?: "",
-            cpf = cpf.value ?: "",
-            phoneNumber = phoneNumber.value ?: "",
+            cpf = cpf.value?.let { Mask.replaceChars(it) } ?: "",
+            phoneNumber = phoneNumber.value?.let { Mask.replaceChars(it) } ?: "",
             email = email.value ?: "",
             juridicalPerson = juridicalPerson,
             address = address

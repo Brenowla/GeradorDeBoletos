@@ -6,6 +6,7 @@ import com.example.geradorboletos.database.di.DatabaseModule
 import com.example.geradorboletos.retrofit.di.RetrofitModule
 import com.example.geradorboletos.ui.add_items.di.AddItemsComponent
 import com.example.geradorboletos.ui.aditional_information.di.AditionalItensComponent
+import com.example.geradorboletos.ui.confirmation.di.ConfirmationComponent
 import com.example.geradorboletos.ui.form_person.di.FormPersonComponent
 import com.example.geradorboletos.ui.send_charge.di.SendChargeComponent
 import dagger.BindsInstance
@@ -31,9 +32,11 @@ interface ApplicationComponent {
 
     fun sendChargeComponent() : SendChargeComponent.Factory
 
+    fun confirmationComponent() : ConfirmationComponent.Factory
+
     fun inject(mainActivity: MainActivity)
 
 }
 
-@Module(subcomponents = [FormPersonComponent::class, AddItemsComponent::class, AditionalItensComponent::class, SendChargeComponent::class])
+@Module(subcomponents = [FormPersonComponent::class, AddItemsComponent::class, AditionalItensComponent::class, SendChargeComponent::class, ConfirmationComponent::class])
 object SubComponentsModule

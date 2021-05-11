@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        <variable
+            name="nameitem"
+            type="String" />
+        
+        <variable
+            name="dismiss"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="action"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:id="@+id/delete_item_blue_bar"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:src="@color/secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/delete_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Remover um item"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/myriadpro_regular"
+            app:layout_constraintStart_toStartOf="@id/delete_item_blue_bar"
+            app:layout_constraintTop_toTopOf="@id/delete_item_blue_bar"
+            app:layout_constraintBottom_toBottomOf="@id/delete_item_blue_bar"
+            />
+
+
+        <TextView
+            android:id="@+id/delete_item_text_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/delete_item_title"
+            app:layout_constraintTop_toBottomOf="@id/delete_item_blue_bar"
+            android:text="@{@string/deseja_remover_o_item + nameitem + '?'}"
+            tools:text="Deseja remover o item Play 5?"
+            android:fontFamily="@font/myriadpro_regular"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginTop="12dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="12dp"
+            android:id="@+id/delete_item_button_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_negative_action"
+            android:fontFamily="@font/bebasneue_bold"
+            android:onClick="@{dismiss}"
+            android:text="@string/cancelar"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toStartOf="@id/delete_item_button_next"
+            app:layout_constraintStart_toStartOf="@id/delete_item_text_description"
+            app:layout_constraintTop_toBottomOf="@id/delete_item_text_description"
+             />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/delete_item_button_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_positive_active"
+            android:fontFamily="@font/bebasneue_bold"
+            android:onClick="@{action}"
+            android:text="@string/remover"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/delete_item_button_back"
+            app:layout_constraintTop_toTopOf="@id/delete_item_button_back" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

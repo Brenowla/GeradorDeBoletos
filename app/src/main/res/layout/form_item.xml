@@ -14,12 +14,16 @@
             type="String" />
 
         <variable
-            name="addItem"
+            name="action"
             type="android.view.View.OnClickListener" />
 
         <variable
             name="dismiss"
             type="android.view.View.OnClickListener" />
+
+        <variable
+            name="buttonText"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -131,8 +135,9 @@
             android:layout_marginLeft="4dp"
             android:background="@drawable/button_positive_active"
             android:fontFamily="@font/bebasneue_bold"
-            android:onClick="@{addItem}"
-            android:text="@string/adicionar"
+            android:onClick="@{action}"
+            android:text="@{buttonText}"
+            tools:text="Adicionar"
             android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@id/form_item_qtd"

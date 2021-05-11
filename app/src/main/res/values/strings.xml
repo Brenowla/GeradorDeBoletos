@@ -40,4 +40,8 @@
     <string name="emissao_boletos">Emissão de Boletos</string>
     <string name="cancelar">Cancelar</string>
     <string name="adicionar">Adicionar</string>
+    <string name="atualizar_item">Atualizar um item</string>
+    <string name="atualizar">Atualizar</string>
+    <string name="deseja_remover_o_item">Deseja remover o item</string>
+    <string name="remover">Remover</string>
 </resources>

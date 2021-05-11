@@ -51,6 +51,7 @@ class AditionalInformationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.bankingBilletData.update(BankingBillet(person, ""))
+        viewModel.updateTotal(items.toList())
 
         activity?.title = getString(R.string.emissao_boletos)
     }
