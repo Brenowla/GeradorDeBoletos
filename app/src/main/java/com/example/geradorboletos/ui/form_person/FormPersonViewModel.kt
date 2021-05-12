@@ -28,6 +28,10 @@ class FormPersonViewModel @Inject constructor() : ViewModel() {
 
     fun getPerson() = personBinding.toPerson(isJuridical = isJuridical.value?:false, hasAdress = hasAdress.value?:false)
 
+    fun updatePerson(person: Person){
+        personBinding.update(person)
+    }
+
     fun verifyName(): Boolean {
         if(empty(personBinding.name.value)) return false
         return true

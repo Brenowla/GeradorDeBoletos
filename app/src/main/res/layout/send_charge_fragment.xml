@@ -8,15 +8,77 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/send_charge_bar_1"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@id/send_charge_bar_2"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/sucess" />
+
+        <ImageView
+            android:id="@+id/send_charge_bar_2"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="8dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@id/send_charge_bar_3"
+            app:layout_constraintStart_toEndOf="@id/send_charge_bar_1"
+            app:layout_constraintTop_toTopOf="@id/send_charge_bar_1"
+            app:srcCompat="@color/sucess" />
+
+        <ImageView
+            android:id="@+id/send_charge_bar_3"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/send_charge_bar_2"
+            app:layout_constraintTop_toTopOf="@id/send_charge_bar_2"
+            app:srcCompat="@color/primary" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/send_charge_bar_1"
+            app:layout_constraintStart_toStartOf="@id/send_charge_bar_1"
+            app:layout_constraintEnd_toEndOf="@id/send_charge_bar_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/gn2"
+            />
+
+
+        <ImageView
+            android:id="@+id/send_charge_rotating_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/send_charge_bar_1"
+            app:layout_constraintStart_toStartOf="@id/send_charge_bar_1"
+            app:layout_constraintEnd_toEndOf="@id/send_charge_bar_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/loading"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="36sp"
-            android:text="Carregando..." />
+            android:textSize="40sp"
+            android:fontFamily="@font/bebasneue_light"
+            android:text="Carregando"
+            app:layout_constraintStart_toStartOf="@id/send_charge_rotating_group"
+            app:layout_constraintEnd_toEndOf="@id/send_charge_rotating_group"
+            app:layout_constraintTop_toBottomOf="@id/send_charge_rotating_group"
+            android:layout_marginTop="4dp"
+            />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

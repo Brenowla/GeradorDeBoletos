@@ -5,13 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.geradorboletos.GeradorBoletosApp
 import com.example.geradorboletos.R
 import com.example.geradorboletos.databinding.FormPersonFragmentBinding
+import com.example.geradorboletos.ui.MainActivity
+import com.example.geradorboletos.ui.MainViewModel
 import com.example.geradorboletos.ui.utils.Mask
 import javax.inject.Inject
 
@@ -20,7 +21,10 @@ class FormPersonFragment : Fragment() {
     lateinit var binding: FormPersonFragmentBinding
 
     @Inject
-    lateinit var viewModel: FormPersonViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel by viewModels<FormPersonViewModel> { viewModelFactory }
+    private val mainViewModel by viewModels<MainViewModel>({activity as MainActivity}) { viewModelFactory }
 
     private val controler by lazy {
         findNavController()
@@ -28,7 +32,7 @@ class FormPersonFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        GeradorBoletosApp.appComponent.formPersonComponent().create().inject(this)
+        MainActivity.mainComponent.formPersonComponent().create().inject(this)
     }
 
     override fun onCreateView(
@@ -43,11 +47,9 @@ class FormPersonFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.personBinding.name.observe(viewLifecycleOwner, Observer {
-            if (it == "Breno") {
-                Toast.makeText(activity, "Deu certo!", Toast.LENGTH_LONG).show()
-            }
-        })
+        mainViewModel.costumer?.let {
+            viewModel.updatePerson(it)
+        }
         binding.toAddItems = View.OnClickListener {
             toAddItems()
         }
@@ -84,7 +86,8 @@ class FormPersonFragment : Fragment() {
     }
 
     private fun toAddItems() {
-        FormPersonFragmentDirections.actionFormPersonFragmentToAddItemsFragment(viewModel.getPerson())
+        mainViewModel.costumer = viewModel.getPerson()
+        FormPersonFragmentDirections.actionFormPersonFragmentToAddItemsFragment()
             .run {
                 controler.navigate(this)
             }

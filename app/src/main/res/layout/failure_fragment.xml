@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/failure_bar_1"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@id/failure_bar_2"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/error" />
+
+        <ImageView
+            android:id="@+id/failure_bar_2"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="8dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@id/failure_bar_3"
+            app:layout_constraintStart_toEndOf="@id/failure_bar_1"
+            app:layout_constraintTop_toTopOf="@id/failure_bar_1"
+            app:srcCompat="@color/error" />
+
+        <ImageView
+            android:id="@+id/failure_bar_3"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/failure_bar_2"
+            app:layout_constraintTop_toTopOf="@id/failure_bar_2"
+            app:srcCompat="@color/error" />
+
+        <TextView
+            android:id="@+id/failure_text_failure_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/myriadpro_regular"
+            android:text="@string/falha_na_emissao_da_cobranca"
+            android:textColor="@color/error"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/failure_bar_3"
+            app:layout_constraintStart_toStartOf="@id/failure_bar_1"
+            app:layout_constraintTop_toBottomOf="@id/failure_bar_1" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/failure_card_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@id/failure_bar_1"
+            app:layout_constraintEnd_toEndOf="@id/failure_bar_3"
+            app:layout_constraintTop_toBottomOf="@id/failure_text_failure_message"
+            android:backgroundTint="@color/backgroud_text">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="60dp"
+                android:fontFamily="@font/myriadpro_bold"
+                android:lineSpacingExtra="5dp"
+                android:text="FALHA INESPERADA! Por FAVOR, TENTE NOVAMENTE"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/failure_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/form_person_button_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/button_negative_action"
+            android:fontFamily="@font/bebasneue_bold"
+            android:text="@string/voltar"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/failure_guideline"
+            app:layout_constraintStart_toStartOf="@id/failure_bar_1"
+            app:layout_constraintHorizontal_bias="0.1"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,14 +1,9 @@
 package com.example.geradorboletos.di
 
 import android.content.Context
-import com.example.geradorboletos.MainActivity
 import com.example.geradorboletos.database.di.DatabaseModule
 import com.example.geradorboletos.retrofit.di.RetrofitModule
-import com.example.geradorboletos.ui.add_items.di.AddItemsComponent
-import com.example.geradorboletos.ui.aditional_information.di.AditionalItensComponent
-import com.example.geradorboletos.ui.confirmation.di.ConfirmationComponent
-import com.example.geradorboletos.ui.form_person.di.FormPersonComponent
-import com.example.geradorboletos.ui.send_charge.di.SendChargeComponent
+import com.example.geradorboletos.ui.di.MainComponent
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
@@ -16,7 +11,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-@Component(modules = [RetrofitModule::class, DatabaseModule::class, SubComponentsModule::class])
+@Component(modules = [RetrofitModule::class, DatabaseModule::class, SubComponentsModule::class, ViewModelBuilderModule::class])
 interface ApplicationComponent {
 
     @Component.Factory
@@ -24,19 +19,11 @@ interface ApplicationComponent {
         fun create(@BindsInstance applicationContext: Context) : ApplicationComponent
     }
 
-    fun formPersonComponent(): FormPersonComponent.Factory
-
-    fun addItemsComponent(): AddItemsComponent.Factory
-
-    fun aditionalItensComponent() : AditionalItensComponent.Factory
-
-    fun sendChargeComponent() : SendChargeComponent.Factory
-
-    fun confirmationComponent() : ConfirmationComponent.Factory
-
-    fun inject(mainActivity: MainActivity)
+    fun mainComponent() : MainComponent.Factory
 
 }
 
-@Module(subcomponents = [FormPersonComponent::class, AddItemsComponent::class, AditionalItensComponent::class, SendChargeComponent::class, ConfirmationComponent::class])
+@Module(subcomponents = [
+    MainComponent::class
+])
 object SubComponentsModule

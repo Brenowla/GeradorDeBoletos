@@ -12,7 +12,7 @@
         android:name=".GeradorBoletosApp"
         android:theme="@style/Theme.GeradorBoletos">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

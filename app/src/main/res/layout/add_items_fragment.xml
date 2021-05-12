@@ -17,6 +17,10 @@
         <variable
             name="toAditionalItems"
             type="android.view.View.OnClickListener" />
+
+        <variable
+            name="backToFormPerson"
+            type="android.view.View.OnClickListener" />
     </data>
 
 
@@ -83,6 +87,7 @@
             android:fontFamily="@font/myriadpro_semibold"
             android:onClick="@{addItemListener}"
             android:text="@string/adicionar_item"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/add_item_button_search_item"
@@ -98,6 +103,7 @@
             android:background="@drawable/button_add_items"
             android:fontFamily="@font/myriadpro_semibold"
             android:text="@string/consultar_item"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@id/add_item_bar_3"
@@ -110,10 +116,10 @@
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toTopOf="@id/add_items_button_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/add_items_button_add"
-            app:layout_constraintTop_toBottomOf="@id/add_items_button_add"
-            app:layout_constraintBottom_toTopOf="@id/add_items_button_back">
+            app:layout_constraintTop_toBottomOf="@id/add_items_button_add">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/form_items_card_view"
@@ -141,7 +147,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:divider="@null"/>
+                android:divider="@null" />
 
         </LinearLayout>
 
@@ -149,7 +155,6 @@
             android:id="@+id/add_items_button_back"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_negative_action"
@@ -160,7 +165,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/add_items_button_next"
             app:layout_constraintStart_toStartOf="@id/add_items_card"
-
+            android:onClick="@{backToFormPerson}"
             app:layout_constraintVertical_bias="1.0" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -168,7 +173,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
             android:background="@drawable/button_positive_active"
             android:fontFamily="@font/bebasneue_bold"
             android:onClick="@{toAditionalItems}"

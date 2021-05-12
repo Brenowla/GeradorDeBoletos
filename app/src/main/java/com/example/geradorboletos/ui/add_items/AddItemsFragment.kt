@@ -8,32 +8,34 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.example.geradorboletos.GeradorBoletosApp
 import com.example.geradorboletos.R
 import com.example.geradorboletos.databinding.AddItemsFragmentBinding
 import com.example.geradorboletos.databinding.DeleteItemDialogBinding
 import com.example.geradorboletos.databinding.FormItemBinding
+import com.example.geradorboletos.ui.MainActivity
+import com.example.geradorboletos.ui.MainViewModel
 import javax.inject.Inject
 
-class AddItemsFragment : Fragment(){
+class AddItemsFragment() : Fragment(){
 
     lateinit var binding: AddItemsFragmentBinding
 
     private val controler by lazy {
         findNavController()
     }
-    private val arguments by navArgs<AddItemsFragmentArgs>()
-    private val person by lazy {
-        arguments.person
-    }
 
     @Inject
-    lateinit var viewModel: AddItemsViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel by viewModels<AddItemsViewModel> { viewModelFactory }
+    private val mainViewModel by viewModels<MainViewModel>({activity as MainActivity}) { viewModelFactory }
 
     val adapter by lazy {
         ListItemsAdapter(requireContext(), menuListener)
@@ -65,9 +67,13 @@ class AddItemsFragment : Fragment(){
 
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        GeradorBoletosApp.appComponent.addItemsComponent().create().inject(this)
+        MainActivity.mainComponent.addItemsComponent().create().inject(this)
     }
 
     override fun onCreateView(
@@ -84,23 +90,37 @@ class AddItemsFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         binding.addItemListener = View.OnClickListener { dialogFormItens(type = 0, -1) }
         binding.toAditionalItems = View.OnClickListener { toAditionalInformation() }
+        binding.backToFormPerson = View.OnClickListener { backToFormPerson() }
         binding.addItemsLista.adapter = adapter
+
+        viewModel.updateList(mainViewModel.items)
 
         viewModel.listItemsData.observe(viewLifecycleOwner, Observer {
             adapter.changeList(it)
+        })
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                backToFormPerson()
+            }
         })
 
         activity?.title = getString(R.string.emissao_boletos)
     }
 
     private fun toAditionalInformation() {
-        AddItemsFragmentDirections.actionAddItemsFragmentToAditionalInformationFragment(
-            person,
-            viewModel.getLista().toTypedArray()
-        ).run {
+        mainViewModel.items = viewModel.getLista()
+        AddItemsFragmentDirections.actionAddItemsFragmentToAditionalInformationFragment().run {
             controler.navigate(this)
         }
 
+    }
+
+    private fun backToFormPerson() {
+        mainViewModel.items = viewModel.getLista()
+        AddItemsFragmentDirections.actionAddItemsFragmentToFormPersonFragment().run {
+            controler.navigate(this)
+        }
     }
 
     private fun dialogFormItens(type: Int, position: Int) {

@@ -17,37 +17,54 @@
         android:id="@+id/addItemsFragment"
         android:name="com.example.geradorboletos.ui.add_items.AddItemsFragment"
         android:label="AddItemsFragment" >
-        <argument
-            android:name="person"
-            app:argType="com.example.geradorboletos.models.Person" />
         <action
             android:id="@+id/action_addItemsFragment_to_aditionalInformationFragment"
             app:destination="@id/aditionalInformationFragment" />
+        <action
+            android:id="@+id/action_addItemsFragment_to_formPersonFragment"
+            app:destination="@id/formPersonFragment"
+            app:popUpTo="@id/formPersonFragment" />
     </fragment>
     <fragment
         android:id="@+id/aditionalInformationFragment"
         android:name="com.example.geradorboletos.ui.aditional_information.AditionalInformationFragment"
         android:label="AditionalInformationFragment" >
-        <argument
-            android:name="person"
-            app:argType="com.example.geradorboletos.models.Person" />
-        <argument
-            android:name="items"
-            app:argType="com.example.geradorboletos.models.Item[]" />
         <action
             android:id="@+id/action_aditionalInformationFragment_to_sendChargeFragment"
             app:destination="@id/sendChargeFragment" />
+        <action
+            android:id="@+id/action_aditionalInformationFragment_to_addItemsFragment"
+            app:destination="@id/addItemsFragment" />
     </fragment>
     <fragment
         android:id="@+id/sendChargeFragment"
         android:name="com.example.geradorboletos.ui.send_charge.SendChargeFragment"
         android:label="send_charge_fragment"
         tools:layout="@layout/send_charge_fragment" >
-        <argument
-            android:name="bankingBillet"
-            app:argType="com.example.geradorboletos.models.BankingBillet" />
-        <argument
-            android:name="items"
-            app:argType="com.example.geradorboletos.models.Item[]" />
+        <action
+            android:id="@+id/action_sendChargeFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment" />
+        <action
+            android:id="@+id/action_sendChargeFragment_to_failureFragment"
+            app:destination="@id/failureFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmationFragment"
+        android:name="com.example.geradorboletos.ui.confirmation.ConfirmationFragment"
+        android:label="ConfirmationFragment" >
+        <action
+            android:id="@+id/action_confirmationFragment_to_formPersonFragment"
+            app:destination="@id/formPersonFragment"
+            app:popUpTo="@id/formPersonFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/failureFragment"
+        android:name="com.example.geradorboletos.ui.failure.FailureFragment"
+        android:label="FailureFragment" >
+        <action
+            android:id="@+id/action_failureFragment_to_aditionalInformationFragment"
+            app:destination="@id/aditionalInformationFragment"
+            app:popUpTo="@id/aditionalInformationFragment" />
     </fragment>
 </navigation>

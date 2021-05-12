@@ -10,11 +10,18 @@ import javax.inject.Inject
 class AddItemsViewModel @Inject constructor(context: Context) : ViewModel() {
 
     val itemBinding = ItemBinding(Item())
-    private val listItems = arrayListOf<Item>()
+    private var listItems = arrayListOf<Item>()
     val listItemsData: MutableLiveData<List<Item>> = MutableLiveData<List<Item>>().also {
         it.value = listItems
     }
     var listSize = 0
+
+    fun updateList(items: ArrayList<Item>){
+        listItems = items
+        listItemsData.value = listItems
+        itemBinding.update(Item())
+        listSize = listItems.size
+    }
 
     fun addItem() {
         listItems.add(itemBinding.toItem())
@@ -23,7 +30,7 @@ class AddItemsViewModel @Inject constructor(context: Context) : ViewModel() {
         listSize = listItems.size
     }
 
-    fun getLista() : List<Item> {
+    fun getLista() : ArrayList<Item> {
         return listItems
     }
 

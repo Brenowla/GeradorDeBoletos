@@ -1,13 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.confirmation.ConfirmationFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+        <variable
+            name="chargeresponse"
+            type="com.example.geradorboletos.models.ChargeResponse" />
+        <variable
+            name="person"
+            type="com.example.geradorboletos.models.Person" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/confirmation_bar_1"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@id/confirmation_bar_2"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/sucess" />
+
+        <ImageView
+            android:id="@+id/confirmation_bar_2"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="8dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@id/confirmation_bar_3"
+            app:layout_constraintStart_toEndOf="@id/confirmation_bar_1"
+            app:layout_constraintTop_toTopOf="@id/confirmation_bar_1"
+            app:srcCompat="@color/sucess" />
+
+        <ImageView
+            android:id="@+id/confirmation_bar_3"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/confirmation_bar_2"
+            app:layout_constraintTop_toTopOf="@id/confirmation_bar_2"
+            app:srcCompat="@color/sucess" />
+
+        <TextView
+            android:id="@+id/confirmation_text_success_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/myriadpro_regular"
+            android:text="@string/cobranca_emitida_com_sucesso"
+            android:textColor="@color/sucess"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/confirmation_bar_3"
+            app:layout_constraintStart_toStartOf="@id/confirmation_bar_1"
+            app:layout_constraintTop_toBottomOf="@id/confirmation_bar_1" />
+
+        <TextView
+            android:id="@+id/confirmation_text_limit_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/bebasneue_bold"
+            android:text="@string/data_de_vencimento"
+            android:textColor="@color/grey_text"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/confirmation_bar_1"
+            app:layout_constraintTop_toBottomOf="@id/confirmation_text_success_message" />
+
+        <TextView
+            android:id="@+id/confirmation_limit_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/myriadpro_regular"
+            android:textColor="@color/grey_text"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/confirmation_text_limit_data"
+            app:layout_constraintTop_toBottomOf="@id/confirmation_text_limit_data"
+            android:text="@{chargeresponse.expireAt}"
+            tools:text="02/02/2018" />
+
+        <TextView
+            android:id="@+id/confirmation_text_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bebasneue_bold"
+            android:text="@string/valor_da_cobranca"
+            android:textColor="@color/grey_text"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.45"
+            app:layout_constraintStart_toEndOf="@id/confirmation_text_limit_data"
+            app:layout_constraintTop_toTopOf="@id/confirmation_text_limit_data" />
+
+        <TextView
+            android:id="@+id/confirmation_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/myriadpro_regular"
+            android:textColor="@color/grey_text"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/confirmation_text_value"
+            app:layout_constraintTop_toBottomOf="@id/confirmation_text_value"
+            android:text='@{"R$" + Integer.toString(chargeresponse.total)}'
+            tools:text="R$ 1.0000" />
+
+        <TextView
+            android:id="@+id/confirmation_text_destination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/bebasneue_bold"
+            android:text="DESTINATÁRIO"
+            android:textColor="@color/grey_text"
+            android:textSize="20sp"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="@id/confirmation_text_limit_data"
+            app:layout_constraintTop_toBottomOf="@id/confirmation_limit_data" />
+
+        <TextView
+            android:id="@+id/confirmation_destination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/myriadpro_regular"
+            android:textColor="@color/grey_text"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/confirmation_text_destination"
+            app:layout_constraintTop_toBottomOf="@id/confirmation_text_destination"
+            android:text="@{person.name}"
+            tools:text="Gorbadock Oldbuck" />
+
+
+        <TextView
+            android:id="@+id/confirmation_text_barcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/bebasneue_bold"
+            android:text="@string/codigo_de_barras"
+            android:textColor="@color/grey_text"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/confirmation_bar_3"
+            app:layout_constraintStart_toStartOf="@id/confirmation_bar_1"
+            app:layout_constraintTop_toBottomOf="@id/confirmation_destination" />
+
+        <TextView
+            android:id="@+id/confirmation_barcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/bebasneue_bold"
+            android:textColor="@color/grey_text"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/confirmation_bar_3"
+            app:layout_constraintStart_toStartOf="@id/confirmation_bar_1"
+            app:layout_constraintTop_toBottomOf="@id/confirmation_text_barcode"
+            android:text="@{chargeresponse.data.barcode}"
+            tools:text="00000.00000 00000.000000 00000.000000 0 00000000000000" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/confirmation_button_copy"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/button_options_confirmation"
+            android:fontFamily="@font/myriadpro_bold"
+            android:text="@string/copiar_codigo"
+            android:textAllCaps="false"
+            android:textColor="@color/secondary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/confirmation_barcode" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/confirmation_button_share"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/button_options_confirmation"
+            android:fontFamily="@font/myriadpro_bold"
+            android:text="@string/compartilhar"
+            android:textAllCaps="false"
+            android:textColor="@color/secondary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/confirmation_button_copy" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/confirmation_button_see_more"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/button_options_confirmation"
+            android:fontFamily="@font/myriadpro_bold"
+            android:text="@string/ver_boleto"
+            android:textAllCaps="false"
+            android:textColor="@color/secondary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/confirmation_button_share" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/confirmation_button_done"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_positive_active"
+            android:fontFamily="@font/bebasneue_bold"
+            android:text="@string/concluir"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintEnd_toEndOf="@id/confirmation_bar_3"
+            app:layout_constraintStart_toStartOf="@id/confirmation_bar_1"
+            app:layout_constraintTop_toTopOf="@id/confirmation_button_see_more"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="1.0"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

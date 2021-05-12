@@ -15,18 +15,17 @@ class SessionManager @Inject constructor(context: Context) {
     }
 
     fun saveAuthToken(token: String) {
-        val editor = prefs.edit()
-        editor.putString(AUTHORIZATION_TOKEN, token)
-        editor.apply()
+        prefs.edit().apply(){
+            putString(AUTHORIZATION_TOKEN, token)
+            apply()
+        }
     }
 
     fun deleteAuthToken(){
-        val editor = prefs.edit()
-        editor.remove(AUTHORIZATION_TOKEN)
+        prefs.edit().remove(AUTHORIZATION_TOKEN).commit()
     }
 
     fun fetchAuthToken(): String? {
         return prefs.getString(AUTHORIZATION_TOKEN, null)
     }
-
 }

@@ -5,60 +5,79 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.navArgs
-import com.example.geradorboletos.GeradorBoletosApp
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.geradorboletos.R
+import com.example.geradorboletos.databinding.SendChargeFragmentBinding
+import com.example.geradorboletos.models.BankingBillet
+import com.example.geradorboletos.ui.MainActivity
+import com.example.geradorboletos.ui.MainViewModel
 import javax.inject.Inject
 
 class SendChargeFragment : Fragment() {
 
+    lateinit var binding: SendChargeFragmentBinding
+
+    private val controler by lazy {
+        findNavController()
+    }
 
     @Inject
-    lateinit var viewModel: SendChargeViewModel
+    lateinit var viewModelFactory : ViewModelProvider.Factory
 
-    private val arguments by navArgs<SendChargeFragmentArgs>()
-    private val bankingBillet by lazy {
-        arguments.bankingBillet
-    }
-    private val items by lazy {
-        arguments.items
-    }
+    private val viewModel by viewModels<SendChargeViewModel> { viewModelFactory }
+    private val mainViewModel by viewModels<MainViewModel>({activity as MainActivity}) { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        GeradorBoletosApp.appComponent.sendChargeComponent().create().inject(this)
+        MainActivity.mainComponent.sendChargeComponent().create().inject(this)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.send_charge_fragment, container, false)
+        binding = SendChargeFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        animate()
         makeCharge()
         viewModel.callResult.observe(viewLifecycleOwner, Observer {
             if(it.error != null){
-                Toast.makeText(context, it.error, Toast.LENGTH_LONG).show()
+                SendChargeFragmentDirections.actionSendChargeFragmentToFailureFragment().run {
+                    controler.navigate(this)
+                }
             }else {
-                Toast.makeText(context, "Tudo certo!", Toast.LENGTH_LONG).show()
+                mainViewModel.chargeResponse = it.data
+                SendChargeFragmentDirections.actionSendChargeFragmentToConfirmationFragment().run {
+                    controler.navigate(this)
+                }
             }
         })
 
         activity?.title = getString(R.string.emissao_boletos)
     }
 
-    private fun makeCharge() {
-        viewModel.sendCharge(bankingBillet, items.asList())
+    private fun animate() {
+        val rotate = AnimationUtils.loadAnimation(context, R.anim.rotate)
+        rotate.fillAfter = true
+        binding.sendChargeRotatingGroup.startAnimation(rotate)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    private fun makeCharge() {
+        val person = mainViewModel.costumer
+        if(person != null && mainViewModel.expireAt != null){
+            val bankingBillet = BankingBillet(person, mainViewModel.expireAt!!)
+            viewModel.sendCharge(bankingBillet, mainViewModel.items)
+        }
     }
+
 
 }

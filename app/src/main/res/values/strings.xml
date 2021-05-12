@@ -44,4 +44,13 @@
     <string name="atualizar">Atualizar</string>
     <string name="deseja_remover_o_item">Deseja remover o item</string>
     <string name="remover">Remover</string>
+    <string name="cobranca_emitida_com_sucesso">Cobrança emitida com sucesso!</string>
+    <string name="data_de_vencimento">DATA DE VENCIMENTO</string>
+    <string name="valor_da_cobranca">VALOR DA COBRANÇA</string>
+    <string name="copiar_codigo">Copiar código</string>
+    <string name="compartilhar">Compartilhar</string>
+    <string name="ver_boleto">Ver Boleto</string>
+    <string name="falha_na_emissao_da_cobranca">Falha na emissão da cobrança.</string>
+    <string name="codigo_de_barras">CÓDIGO DE BARRAS</string>
+    <string name="concluir">Concluir</string>
 </resources>

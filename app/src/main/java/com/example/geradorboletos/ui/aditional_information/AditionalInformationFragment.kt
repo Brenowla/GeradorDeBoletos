@@ -5,13 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.example.geradorboletos.GeradorBoletosApp
 import com.example.geradorboletos.R
 import com.example.geradorboletos.databinding.AditionalInformationFragmentBinding
-import com.example.geradorboletos.models.BankingBillet
+import com.example.geradorboletos.ui.MainActivity
+import com.example.geradorboletos.ui.MainViewModel
 import javax.inject.Inject
 
 class AditionalInformationFragment : Fragment() {
@@ -22,20 +24,16 @@ class AditionalInformationFragment : Fragment() {
         findNavController()
     }
 
-    private val arguments by navArgs<AditionalInformationFragmentArgs>()
-    private val person by lazy {
-        arguments.person
-    }
-    private val items by lazy {
-        arguments.items
-    }
 
     @Inject
-    lateinit var viewModel: AditionalInformationViewModel
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val viewModel by viewModels<AditionalInformationViewModel> { viewModelFactory }
+    private val mainViewModel by viewModels<MainViewModel>({activity as MainActivity}) { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        GeradorBoletosApp.appComponent.aditionalItensComponent().create().inject(this)
+        MainActivity.mainComponent.aditionalItensComponent().create().inject(this)
     }
 
     override fun onCreateView(
@@ -50,17 +48,28 @@ class AditionalInformationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.bankingBilletData.update(BankingBillet(person, ""))
-        viewModel.updateTotal(items.toList())
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                backToAddItens()
+            }
+        })
+
+        viewModel.updateTotal(mainViewModel.items)
 
         activity?.title = getString(R.string.emissao_boletos)
     }
 
     fun toSendCharge() {
-        val bankingBillet = viewModel.bankingBilletData.toBankingBillet()
-        AditionalInformationFragmentDirections.actionAditionalInformationFragmentToSendChargeFragment(bankingBillet,items).run {
+        mainViewModel.expireAt = viewModel.expireAt.value
+        AditionalInformationFragmentDirections.actionAditionalInformationFragmentToSendChargeFragment().run {
             controler.navigate(this)
         }
+    }
+
+    fun backToAddItens(){
+        mainViewModel.expireAt = viewModel.expireAt.value
+
     }
 
 }
