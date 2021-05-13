@@ -53,4 +53,6 @@
     <string name="falha_na_emissao_da_cobranca">Falha na emissão da cobrança.</string>
     <string name="codigo_de_barras">CÓDIGO DE BARRAS</string>
     <string name="concluir">Concluir</string>
+    <string name="pesquise_por_pessoa">Pesquise por pessoa</string>
+    <string name="pesquise_por_item">Pesquise por pessoa</string>
 </resources>

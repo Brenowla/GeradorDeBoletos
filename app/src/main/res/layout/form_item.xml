@@ -86,6 +86,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@={viewModel.itemBinding.value}"
+            app:moneyMask='@{"R$"}'
             app:layout_constraintEnd_toStartOf="@+id/form_item_text_qtd"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/form_item_text_value"

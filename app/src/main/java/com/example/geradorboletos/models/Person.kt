@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-class Person(
+data class Person(
     val name: String? = null,
     val cpf: String? = null,
     @SerializedName("phone_number")

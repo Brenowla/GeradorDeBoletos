@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.geradorboletos.databinding.ConfirmationFragmentBinding
 import com.example.geradorboletos.ui.MainActivity
 import com.example.geradorboletos.ui.MainViewModel
@@ -16,6 +17,10 @@ import javax.inject.Inject
 class ConfirmationFragment : Fragment() {
 
     lateinit var binding: ConfirmationFragmentBinding
+
+    private val controler by lazy {
+        findNavController()
+    }
 
     @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory
@@ -30,7 +35,15 @@ class ConfirmationFragment : Fragment() {
         binding = ConfirmationFragmentBinding.inflate(inflater, container, false)
         binding.chargeresponse = mainViewModel.chargeResponse
         binding.person = mainViewModel.costumer
+        binding.backToFormPerson = View.OnClickListener { backToFormPerson() }
         return binding.root
+    }
+
+    fun backToFormPerson(){
+        mainViewModel.resetData()
+        ConfirmationFragmentDirections.actionConfirmationFragmentToFormPersonFragment().run {
+            controler.navigate(this)
+        }
     }
 
     override fun onAttach(context: Context) {

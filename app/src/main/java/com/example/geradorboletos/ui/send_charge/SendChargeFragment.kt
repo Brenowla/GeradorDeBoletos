@@ -49,6 +49,7 @@ class SendChargeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         animate()
         makeCharge()
+
         viewModel.callResult.observe(viewLifecycleOwner, Observer {
             if(it.error != null){
                 SendChargeFragmentDirections.actionSendChargeFragmentToFailureFragment().run {
@@ -56,6 +57,7 @@ class SendChargeFragment : Fragment() {
                 }
             }else {
                 mainViewModel.chargeResponse = it.data
+                viewModel.savePersonAndItems(mainViewModel.costumer!!,mainViewModel.items)
                 SendChargeFragmentDirections.actionSendChargeFragmentToConfirmationFragment().run {
                     controler.navigate(this)
                 }

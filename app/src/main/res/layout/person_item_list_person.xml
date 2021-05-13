@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="onClick"
+            type="android.view.View.OnClickListener" />
+        <variable
+            name="person"
+            type="com.example.geradorboletos.models.Person" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{onClick}"
+        android:paddingBottom="12dp">
+
+        <TextView
+            android:id="@+id/person_item_list_inicials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backgroud_text_inicials"
+            tools:text="VM"
+            tools:textColor="@color/secondary"
+            android:layout_margin="12dp"
+            android:padding="12dp"
+            android:textSize="24sp"
+            android:text="AA"
+            android:fontFamily="@font/myriadpro_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/person_item_list_name"
+            android:layout_marginStart="36dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/person_item_list_inicials"
+            app:layout_constraintTop_toTopOf="@id/person_item_list_inicials"
+            app:layout_constraintBottom_toTopOf="@id/person_item_list_document"
+            tools:text="Vitor Macedo"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="@{person.name}"
+            android:fontFamily="@font/myriadpro_bold"
+            />
+
+        <TextView
+            android:id="@+id/person_item_list_document"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/person_item_list_name"
+            app:layout_constraintTop_toBottomOf="@id/person_item_list_name"
+            app:layout_constraintBottom_toBottomOf="@id/person_item_list_inicials"
+            app:maskInput='@{"###.###.###-##"}'
+            app:valueField="@{person.cpf}"
+            tools:text="000.000.000-00"
+            android:textSize="16sp"
+            android:fontFamily="@font/myriadpro_bold"
+            android:textColor="@color/grey_text"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -13,7 +13,6 @@ import com.example.geradorboletos.R
 import com.example.geradorboletos.databinding.FormPersonFragmentBinding
 import com.example.geradorboletos.ui.MainActivity
 import com.example.geradorboletos.ui.MainViewModel
-import com.example.geradorboletos.ui.utils.Mask
 import javax.inject.Inject
 
 class FormPersonFragment : Fragment() {
@@ -53,36 +52,11 @@ class FormPersonFragment : Fragment() {
         binding.toAddItems = View.OnClickListener {
             toAddItems()
         }
-        putMaskFields()
+        binding.toListPerson = View.OnClickListener {
+            toListPerson()
+        }
         binding.verifications = verifications
         activity?.title = getString(R.string.emissao_boletos)
-    }
-
-    private fun putMaskFields() {
-        binding.formPersonCpf.addTextChangedListener(
-            Mask.mask(
-                "###.###.###-##",
-                editText = binding.formPersonCpf
-            )
-        )
-        binding.formPersonPhoneNumber.addTextChangedListener(
-            Mask.mask(
-                "(##) #####-####",
-                editText = binding.formPersonPhoneNumber
-            )
-        )
-        binding.formPersonCep.addTextChangedListener(
-            Mask.mask(
-                "#####-###",
-                editText = binding.formPersonCep
-            )
-        )
-        binding.formPersonCnpj.addTextChangedListener(
-            Mask.mask(
-                "##.###.###/####-##",
-                editText = binding.formPersonCnpj
-            )
-        )
     }
 
     private fun toAddItems() {
@@ -91,6 +65,13 @@ class FormPersonFragment : Fragment() {
             .run {
                 controler.navigate(this)
             }
+    }
+
+    private fun toListPerson() {
+        mainViewModel.costumer = viewModel.getPerson()
+        FormPersonFragmentDirections.actionFormPersonFragmentToListPersonFragment().run {
+            controler.navigate(this)
+        }
     }
 
     private val verifications = object : View.OnFocusChangeListener {

@@ -5,6 +5,7 @@ import android.text.TextWatcher
 import android.widget.EditText
 
 class Mask {
+
     companion object {
         fun replaceChars(field: String): String {
             return field.replace(".", "").replace("-", "")
@@ -12,7 +13,6 @@ class Mask {
                 .replace("/", "").replace(" ", "")
                 .replace("*", "")
         }
-
 
         fun mask(mask: String, editText: EditText): TextWatcher {
 
@@ -30,7 +30,7 @@ class Mask {
 
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                     val str = replaceChars(s.toString())
-                    var cpfWithMask = ""
+                    var fieldWithMask = ""
 
                     if (count == 0)//is deleting
                         isUpdating = true
@@ -44,11 +44,11 @@ class Mask {
                     var i = 0
                     for (m: Char in mask.toCharArray()) {
                         if (m != '#' && str.length > oldString.length) {
-                            cpfWithMask += m
+                            fieldWithMask += m
                             continue
                         }
                         try {
-                            cpfWithMask += str.get(i)
+                            fieldWithMask += str.get(i)
                         } catch (e: Exception) {
                             break
                         }
@@ -56,8 +56,8 @@ class Mask {
                     }
 
                     isUpdating = true
-                    editText.setText(cpfWithMask)
-                    editText.setSelection(cpfWithMask.length)
+                    editText.setText(fieldWithMask)
+                    editText.setSelection(fieldWithMask.length)
 
                 }
 
@@ -68,5 +68,24 @@ class Mask {
 
             return textWatcher
         }
+
+        fun imediateMask(mask:String, str: String): String {
+            var fieldWithMask = ""
+            var i = 0
+            for (m: Char in mask.toCharArray()) {
+                if (m != '#' && str.length > 1) {
+                    fieldWithMask += m
+                    continue
+                }
+                try {
+                    fieldWithMask += str.get(i)
+                } catch (e: Exception) {
+                    break
+                }
+                i++
+            }
+            return fieldWithMask
+        }
+
     }
 }

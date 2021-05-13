@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -91,18 +90,13 @@ class AddItemsFragment() : Fragment(){
         binding.addItemListener = View.OnClickListener { dialogFormItens(type = 0, -1) }
         binding.toAditionalItems = View.OnClickListener { toAditionalInformation() }
         binding.backToFormPerson = View.OnClickListener { backToFormPerson() }
+        binding.toListItems = View.OnClickListener { toListItems() }
         binding.addItemsLista.adapter = adapter
 
         viewModel.updateList(mainViewModel.items)
 
         viewModel.listItemsData.observe(viewLifecycleOwner, Observer {
             adapter.changeList(it)
-        })
-
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                backToFormPerson()
-            }
         })
 
         activity?.title = getString(R.string.emissao_boletos)
@@ -114,6 +108,13 @@ class AddItemsFragment() : Fragment(){
             controler.navigate(this)
         }
 
+    }
+
+    private fun toListItems() {
+        mainViewModel.items = viewModel.getLista()
+        AddItemsFragmentDirections.actionAddItemsFragmentToListItemsFragment().run {
+            controler.navigate(this)
+        }
     }
 
     private fun backToFormPerson() {

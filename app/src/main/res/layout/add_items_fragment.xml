@@ -21,6 +21,10 @@
         <variable
             name="backToFormPerson"
             type="android.view.View.OnClickListener" />
+
+        <variable
+            name="toListItems"
+            type="android.view.View.OnClickListener" />
     </data>
 
 
@@ -106,6 +110,7 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:onClick="@{toListItems}"
             app:layout_constraintEnd_toEndOf="@id/add_item_bar_3"
             app:layout_constraintStart_toEndOf="@id/add_items_button_add"
             app:layout_constraintTop_toTopOf="@id/add_items_button_add" />

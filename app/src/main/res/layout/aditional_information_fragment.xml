@@ -11,6 +11,9 @@
         <variable
             name="toSendCharge"
             type="android.view.View.OnClickListener" />
+        <variable
+            name="backToAddItens"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,7 +107,8 @@
             android:fontFamily="@font/myriadpro_regular"
             android:textColor="@color/primary"
             android:textStyle="bold"
-            android:text='@{"R$ " +  Integer.toString(viewModel.totalValue)}'
+            app:moneyMask='@{"R$"}'
+            app:valueField="@{Integer.toString(viewModel.totalValue)}"
             tools:text="R$ 500000"
             />
 
@@ -118,6 +122,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginEnd="4dp"
             android:text="@string/voltar"
+            android:onClick="@{backToAddItens}"
             android:textColor="@color/primary"
             android:textSize="24sp"
             android:background="@drawable/button_negative_action"

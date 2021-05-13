@@ -10,4 +10,6 @@ class ItemRepository @Inject constructor(private val itemDAO: ItemDAO) {
         itemDAO.save(items)
     }
 
+    fun getAllItems() = itemDAO.searchAll()
+
 }

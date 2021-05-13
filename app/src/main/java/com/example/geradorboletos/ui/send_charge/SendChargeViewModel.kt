@@ -28,8 +28,6 @@ class SendChargeViewModel @Inject constructor(
     val callResult: MutableLiveData<Resource<ChargeResponse>> = MutableLiveData()
 
     fun sendCharge(bankingBillet: BankingBillet, items : List<Item>) {
-        savePersonAndItems(bankingBillet, items)
-
         val charge = Charge(items, Payment(bankingBillet))
 
         var token = sessionManager.fetchAuthToken()
@@ -43,12 +41,12 @@ class SendChargeViewModel @Inject constructor(
         //trySendCharge(charge)
     }
 
-    private fun savePersonAndItems(
-        bankingBillet: BankingBillet,
+    fun savePersonAndItems(
+        person: Person,
         items: List<Item>
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            personRepository.savePerson(PersonData(bankingBillet.customer))
+            personRepository.savePerson(PersonData(person))
             itemRepository.saveItem(items)
         }
     }

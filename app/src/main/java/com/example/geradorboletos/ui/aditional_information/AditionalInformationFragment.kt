@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -43,17 +42,12 @@ class AditionalInformationFragment : Fragment() {
         binding = AditionalInformationFragmentBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         binding.toSendCharge = View.OnClickListener { toSendCharge() }
+        binding.backToAddItens = View.OnClickListener { backToAddItens() }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                backToAddItens()
-            }
-        })
 
         viewModel.updateTotal(mainViewModel.items)
 
@@ -69,7 +63,9 @@ class AditionalInformationFragment : Fragment() {
 
     fun backToAddItens(){
         mainViewModel.expireAt = viewModel.expireAt.value
-
+        AditionalInformationFragmentDirections.actionAditionalInformationFragmentToAddItemsFragment().run {
+            controler.navigate(this)
+        }
     }
 
 }

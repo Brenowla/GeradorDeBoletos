@@ -11,7 +11,11 @@
         android:label="FormPersonFragment" >
         <action
             android:id="@+id/action_formPersonFragment_to_addItemsFragment"
-            app:destination="@id/addItemsFragment" />
+            app:destination="@id/addItemsFragment"
+            app:popUpTo="@id/addItemsFragment" />
+        <action
+            android:id="@+id/action_formPersonFragment_to_listPersonFragment"
+            app:destination="@id/listPersonFragment" />
     </fragment>
     <fragment
         android:id="@+id/addItemsFragment"
@@ -19,11 +23,15 @@
         android:label="AddItemsFragment" >
         <action
             android:id="@+id/action_addItemsFragment_to_aditionalInformationFragment"
-            app:destination="@id/aditionalInformationFragment" />
+            app:destination="@id/aditionalInformationFragment"
+            app:popUpTo="@id/aditionalInformationFragment" />
         <action
             android:id="@+id/action_addItemsFragment_to_formPersonFragment"
             app:destination="@id/formPersonFragment"
             app:popUpTo="@id/formPersonFragment" />
+        <action
+            android:id="@+id/action_addItemsFragment_to_listItemsFragment"
+            app:destination="@id/listItemsFragment" />
     </fragment>
     <fragment
         android:id="@+id/aditionalInformationFragment"
@@ -31,7 +39,8 @@
         android:label="AditionalInformationFragment" >
         <action
             android:id="@+id/action_aditionalInformationFragment_to_sendChargeFragment"
-            app:destination="@id/sendChargeFragment" />
+            app:destination="@id/sendChargeFragment"
+            app:popUpTo="@id/sendChargeFragment" />
         <action
             android:id="@+id/action_aditionalInformationFragment_to_addItemsFragment"
             app:destination="@id/addItemsFragment" />
@@ -43,7 +52,8 @@
         tools:layout="@layout/send_charge_fragment" >
         <action
             android:id="@+id/action_sendChargeFragment_to_confirmationFragment"
-            app:destination="@id/confirmationFragment" />
+            app:destination="@id/confirmationFragment"
+            app:popUpTo="@id/confirmationFragment" />
         <action
             android:id="@+id/action_sendChargeFragment_to_failureFragment"
             app:destination="@id/failureFragment" />
@@ -66,5 +76,26 @@
             android:id="@+id/action_failureFragment_to_aditionalInformationFragment"
             app:destination="@id/aditionalInformationFragment"
             app:popUpTo="@id/aditionalInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listPersonFragment"
+        android:name="com.example.geradorboletos.ui.list_person.ListPersonFragment"
+        android:label="list_person_fragment"
+        tools:layout="@layout/list_person_fragment" >
+        <action
+            android:id="@+id/action_listPersonFragment_to_formPersonFragment"
+            app:destination="@id/formPersonFragment"
+            app:popUpTo="@id/formPersonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listItemsFragment"
+        android:name="com.example.geradorboletos.ui.list_items.ListItemsFragment"
+        android:label="list_items_fragment"
+        tools:layout="@layout/list_items_fragment" >
+        <action
+            android:id="@+id/action_listItemsFragment_to_addItemsFragment"
+            app:destination="@id/addItemsFragment"
+            app:popUpTo="@id/addItemsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

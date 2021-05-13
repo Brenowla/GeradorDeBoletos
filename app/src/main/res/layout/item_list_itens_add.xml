@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="com.example.geradorboletos.ui.utils.Mask" />
+
         <variable
             name="item"
             type="com.example.geradorboletos.models.Item" />
@@ -32,67 +35,64 @@
                     android:id="@+id/item_text_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/myriadpro_regular"
                     android:text="@string/descricao"
                     android:textColor="#6E6F71"
                     android:textSize="14dp"
-                    android:fontFamily="@font/myriadpro_regular"
                     android:textStyle="bold"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/item_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toEndOf="@id/item_text_description"
-                    app:layout_constraintTop_toTopOf="@id/item_text_description"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.20"
-                    tools:text="Playstation"
+                    android:fontFamily="@font/myriadpro_regular"
                     android:text="@{item.name}"
                     android:textColor="#6E6F71"
                     android:textSize="14dp"
-                    android:fontFamily="@font/myriadpro_regular"
                     android:textStyle="bold"
-                    />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.20"
+                    app:layout_constraintStart_toEndOf="@id/item_text_description"
+                    app:layout_constraintTop_toTopOf="@id/item_text_description"
+                    tools:text="Playstation" />
 
                 <ImageButton
                     android:id="@+id/item_button_options"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/noun_option_1366580"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/item_description"
                     android:backgroundTint="@color/white"
                     android:onClick="@{showMenu}"
-                    />
+                    android:src="@drawable/noun_option_1366580"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/item_description" />
 
                 <TextView
                     android:id="@+id/item_text_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/item_text_description"
-                    app:layout_constraintTop_toBottomOf="@id/item_text_description"
+                    android:fontFamily="@font/myriadpro_regular"
                     android:text="@string/valor"
                     android:textColor="#6E6F71"
                     android:textSize="14dp"
-                    android:fontFamily="@font/myriadpro_regular"
                     android:textStyle="bold"
-                    />
+                    app:layout_constraintStart_toStartOf="@id/item_text_description"
+                    app:layout_constraintTop_toBottomOf="@id/item_text_description" />
 
                 <TextView
                     android:id="@+id/item_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/item_description"
-                    app:layout_constraintTop_toTopOf="@id/item_text_value"
-                    android:text="@{Integer.toString(item.value)}"
-                    tools:text="R$ 1000,00"
+                    android:fontFamily="@font/myriadpro_regular"
+                    app:valueField="@{Integer.toString(item.value)}"
                     android:textColor="#6E6F71"
                     android:textSize="14dp"
-                    android:fontFamily="@font/myriadpro_regular"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/item_description"
+                    app:layout_constraintTop_toTopOf="@id/item_text_value"
+                    app:moneyMask='@{"R$"}'
+                    tools:text="R$ 1000,00" />
                 <!--            android:text="@{item.value}"-->
 
 
@@ -100,56 +100,66 @@
                     android:id="@+id/item_text_qtd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/item_text_value"
-                    app:layout_constraintTop_toBottomOf="@id/item_text_value"
+                    android:fontFamily="@font/myriadpro_regular"
                     android:text="@string/quantidade_value"
                     android:textColor="#6E6F71"
                     android:textSize="14dp"
-                    android:fontFamily="@font/myriadpro_regular"
                     android:textStyle="bold"
-                    />
+                    app:layout_constraintStart_toStartOf="@id/item_text_value"
+                    app:layout_constraintTop_toBottomOf="@id/item_text_value" />
 
                 <TextView
                     android:id="@+id/item_qtd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/item_value"
-                    app:layout_constraintTop_toBottomOf="@id/item_value"
+                    android:fontFamily="@font/myriadpro_regular"
                     android:text="@{Integer.toString(item.amount)}"
-                    tools:text="1"
                     android:textColor="#6E6F71"
                     android:textSize="14dp"
-                    android:fontFamily="@font/myriadpro_regular"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/item_value"
+                    app:layout_constraintTop_toBottomOf="@id/item_value"
+                    tools:text="1" />
                 <!--            android:text="@{item.amount}"-->
+
+                <ImageView
+                    android:id="@+id/item_backgroud_text"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/background_total_item"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/item_text_qtd"
+                    app:layout_constraintTop_toBottomOf="@id/item_text_qtd" />
 
 
                 <TextView
                     android:id="@+id/item_text_subtotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/item_text_qtd"
-                    app:layout_constraintTop_toBottomOf="@id/item_qtd"
-
+                    android:fontFamily="@font/myriadpro_regular"
+                    android:paddingVertical="4dp"
                     android:text="@string/subtotal"
                     android:textColor="#6E6F71"
                     android:textSize="14dp"
-                    android:fontFamily="@font/myriadpro_regular"
                     android:textStyle="bold"
-                    />
+                    app:layout_constraintStart_toStartOf="@id/item_backgroud_text"
+                    app:layout_constraintTop_toTopOf="@id/item_backgroud_text" />
 
                 <TextView
                     android:id="@+id/item_subtotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/item_qtd"
-                    app:layout_constraintTop_toBottomOf="@id/item_qtd"
-                    android:text="@{Integer.toString(item.amount * item.value)}"
-                    tools:text="R$ 1000,00"
+                    android:fontFamily="@font/myriadpro_regular"
+                    android:paddingVertical="4dp"
                     android:textColor="#6E6F71"
                     android:textSize="14dp"
-                    android:fontFamily="@font/myriadpro_regular"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/item_qtd"
+                    app:layout_constraintTop_toBottomOf="@id/item_qtd"
+                    app:moneyMask='@{"R$"}'
+                    app:valueField="@{Integer.toString(item.amount * item.value)}"
+                    tools:text="R$ 1000,00" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

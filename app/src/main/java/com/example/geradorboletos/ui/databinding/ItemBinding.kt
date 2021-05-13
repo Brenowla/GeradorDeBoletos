@@ -2,6 +2,7 @@ package com.example.geradorboletos.ui.databinding
 
 import androidx.lifecycle.MutableLiveData
 import com.example.geradorboletos.models.Item
+import com.example.geradorboletos.ui.utils.MoneyMask
 
 class ItemBinding(
     private var item: Item,
@@ -26,7 +27,7 @@ class ItemBinding(
     fun toItem(): Item{
         this.item = Item(
             name = name.value ?: "",
-            value = value.value?.toInt() ?: 0,
+            value = value.value?.let{ MoneyMask.replaceCharsReal(it).toInt() } ?: 0,
             amount = amount.value?.toInt() ?: 1
         )
         return this.item

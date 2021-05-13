@@ -10,4 +10,6 @@ class PersonRepository @Inject constructor(private val personDAO: PersonDAO) {
         personDAO.save(person)
     }
 
+    fun getAllPerson() = personDAO.searchAll()
+
 }

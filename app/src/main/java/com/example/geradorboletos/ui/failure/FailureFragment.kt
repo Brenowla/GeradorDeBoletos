@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.geradorboletos.databinding.FailureFragmentBinding
 import com.example.geradorboletos.ui.MainActivity
 import javax.inject.Inject
@@ -15,6 +16,10 @@ import javax.inject.Inject
 class FailureFragment : Fragment() {
 
     lateinit var binding: FailureFragmentBinding
+
+    private val controler by lazy {
+        findNavController()
+    }
 
     @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory
@@ -31,7 +36,15 @@ class FailureFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FailureFragmentBinding.inflate(inflater, container, false)
+        binding.backToAditionalInformation = View.OnClickListener { backToAditionalInformation() }
         return binding.root
+    }
+
+
+    fun backToAditionalInformation(){
+        FailureFragmentDirections.actionFailureFragmentToAditionalInformationFragment().run {
+            controler.navigate(this)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

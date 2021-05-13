@@ -18,6 +18,10 @@
         <variable
             name="verifications"
             type="android.view.View.OnFocusChangeListener" />
+
+        <variable
+            name="toListPerson"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -149,6 +153,7 @@
                     android:backgroundTint="@color/white"
                     android:padding="2dp"
                     android:src="@drawable/ic_list_temporary"
+                    android:onClick="@{toListPerson}"
                     app:layout_constraintBottom_toBottomOf="@id/form_person_full_name"
                     app:layout_constraintEnd_toEndOf="@id/form_person_full_name"
                     app:layout_constraintTop_toTopOf="@id/form_person_full_name" />
@@ -170,6 +175,7 @@
                     android:hint="@string/ex_cpf"
                     android:inputType="number"
                     android:text="@={viewModel.personBinding.cpf}"
+                    app:maskInput='@{"###.###.###-##"}'
                     app:layout_constraintEnd_toEndOf="@id/form_person_full_name"
                     app:layout_constraintStart_toStartOf="@id/form_person_text_cpf"
                     app:layout_constraintTop_toBottomOf="@id/form_person_text_cpf" />
@@ -220,6 +226,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/ex_cnpj"
                         android:inputType="number"
+                        app:maskInput='@{"##.###.###/####-##"}'
                         android:text="@={viewModel.personBinding.cnpj}"
                         android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
                         app:layout_constraintEnd_toEndOf="@id/form_person_corporate_name"
@@ -245,6 +252,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/ex_telefone"
                     android:inputType="number"
+                    app:maskInput='@{"(##) #####-####"}'
                     android:text="@={viewModel.personBinding.phoneNumber}"
                     app:layout_constraintEnd_toEndOf="@id/form_person_cpf"
                     app:layout_constraintStart_toStartOf="@id/form_person_cpf"
@@ -329,8 +337,8 @@
                         android:text="@={viewModel.personBinding.street}"
                         android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/form_person_text_street" />
+                        app:layout_constraintStart_toStartOf="@id/form_person_text_street"
+                        app:layout_constraintTop_toBottomOf="@id/form_person_text_street" />
 
                     <TextView
                         android:id="@+id/form_person_text_number"
@@ -418,6 +426,7 @@
                         android:hint="@string/ex_cep"
                         android:inputType="number"
                         android:text="@={viewModel.personBinding.zipcode}"
+                        app:maskInput='@{"#####-###"}'
                         android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
                         app:layout_constraintBottom_toBottomOf="@id/form_person_neighborhood"
                         app:layout_constraintEnd_toEndOf="@id/form_person_complement"
