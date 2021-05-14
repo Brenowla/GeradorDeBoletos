@@ -1,6 +1,7 @@
 package com.example.geradorboletos.ui.add_items
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.geradorboletos.models.Item
@@ -57,4 +58,15 @@ class AddItemsViewModel @Inject constructor(context: Context) : ViewModel() {
         return true
     }
 
+    fun addQtd() {
+        Log.i("Add", "aqui")
+        itemBinding.amount.value =  (itemBinding.amount.value?.toInt()?:0+1).toString()
+    }
+
+    fun removeQtd() {
+        val newValue = (itemBinding.amount.value?.toInt()?:0-1)
+        if(newValue >= 1){
+            itemBinding.amount.value = newValue.toString()
+        }
+    }
 }

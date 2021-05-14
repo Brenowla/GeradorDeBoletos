@@ -32,10 +32,10 @@
             android:id="@+id/form_person_scrollable_items"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/form_person_button_back"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/form_person_button_back">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -127,6 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/myriadpro_bold"
+                    android:inputType="textPersonName"
                     android:text="@string/nome_completo"
                     android:textColor="#95989A"
                     app:layout_constraintStart_toStartOf="@+id/form_person_button_fisical_person"
@@ -136,12 +137,15 @@
                     android:id="@+id/form_person_full_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:afterTextChanged="@{viewModel.formPersonValidators::nameValidator}"
                     android:hint="@string/nome_exemplo"
+                    android:maxLength="200"
                     android:text="@={viewModel.personBinding.name}"
+                    app:colorChanger="@{viewModel.formPersonValidators.name}"
                     app:layout_constraintEnd_toEndOf="@id/form_person_button_juridical_person"
                     app:layout_constraintStart_toStartOf="@id/form_person_text_full_name"
-                    app:layout_constraintTop_toBottomOf="@id/form_person_text_full_name"
-                    app:onFocusChangeListener="@{verifications}" />
+                    app:layout_constraintTop_toBottomOf="@id/form_person_text_full_name" />
+                <!--                    app:onFocusChangeListener="@{verifications}" />-->
                 <!--                android:backgroundTint="@color/primary"-->
 
 
@@ -151,9 +155,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="8dp"
                     android:backgroundTint="@color/white"
-                    android:padding="2dp"
-                    android:src="@drawable/ic_list_temporary"
                     android:onClick="@{toListPerson}"
+                    android:padding="2dp"
+                    android:src="@drawable/list_person"
                     app:layout_constraintBottom_toBottomOf="@id/form_person_full_name"
                     app:layout_constraintEnd_toEndOf="@id/form_person_full_name"
                     app:layout_constraintTop_toTopOf="@id/form_person_full_name" />
@@ -172,13 +176,16 @@
                     android:id="@+id/form_person_cpf"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:afterTextChanged="@{viewModel.formPersonValidators::cpfValidator}"
                     android:hint="@string/ex_cpf"
                     android:inputType="number"
+                    android:maxLength="14"
                     android:text="@={viewModel.personBinding.cpf}"
-                    app:maskInput='@{"###.###.###-##"}'
+                    app:colorChanger="@{viewModel.formPersonValidators.cpf}"
                     app:layout_constraintEnd_toEndOf="@id/form_person_full_name"
                     app:layout_constraintStart_toStartOf="@id/form_person_text_cpf"
-                    app:layout_constraintTop_toBottomOf="@id/form_person_text_cpf" />
+                    app:layout_constraintTop_toBottomOf="@id/form_person_text_cpf"
+                    app:maskInput='@{"###.###.###-##"}' />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/form_person_juridical_person_group"
@@ -203,8 +210,11 @@
                         android:id="@+id/form_person_corporate_name"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:afterTextChanged="@{viewModel.formPersonValidators::corporateNameValidator}"
+                        android:maxLength="200"
                         android:text="@={viewModel.personBinding.corporateName}"
                         android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
+                        app:colorChanger="@{viewModel.formPersonValidators.corporateName}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/form_person_text_corporate_name" />
@@ -224,14 +234,17 @@
                         android:id="@+id/form_person_cnpj"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:afterTextChanged="@{viewModel.formPersonValidators::cnpjValidator}"
                         android:hint="@string/ex_cnpj"
                         android:inputType="number"
-                        app:maskInput='@{"##.###.###/####-##"}'
+                        android:maxLength="18"
                         android:text="@={viewModel.personBinding.cnpj}"
                         android:visibility="@{viewModel.isJuridical ? View.VISIBLE : View.GONE}"
+                        app:colorChanger="@{viewModel.formPersonValidators.cnpj}"
                         app:layout_constraintEnd_toEndOf="@id/form_person_corporate_name"
                         app:layout_constraintStart_toStartOf="@id/form_person_corporate_name"
-                        app:layout_constraintTop_toBottomOf="@id/form_person_text_cnpj" />
+                        app:layout_constraintTop_toBottomOf="@id/form_person_text_cnpj"
+                        app:maskInput='@{"##.###.###/####-##"}' />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -250,13 +263,16 @@
                     android:id="@+id/form_person_phone_number"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:afterTextChanged="@{viewModel.formPersonValidators::phoneValidator}"
                     android:hint="@string/ex_telefone"
                     android:inputType="number"
-                    app:maskInput='@{"(##) #####-####"}'
+                    android:maxLength="16"
                     android:text="@={viewModel.personBinding.phoneNumber}"
+                    app:colorChanger="@{viewModel.formPersonValidators.phone}"
                     app:layout_constraintEnd_toEndOf="@id/form_person_cpf"
                     app:layout_constraintStart_toStartOf="@id/form_person_cpf"
-                    app:layout_constraintTop_toBottomOf="@id/form_person_text_phone_number" />
+                    app:layout_constraintTop_toBottomOf="@id/form_person_text_phone_number"
+                    app:maskInput='@{"(##) # ####-####"}' />
 
                 <TextView
                     android:id="@+id/form_person_text_email"
@@ -272,9 +288,12 @@
                     android:id="@+id/form_person_email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:afterTextChanged="@{viewModel.formPersonValidators::emailValidator}"
                     android:fontFamily="@font/myriadpro_bold"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="100"
                     android:text="@={viewModel.personBinding.email}"
-                    android:textColor="#95989A"
+                    app:colorChanger="@{viewModel.formPersonValidators.email}"
                     app:layout_constraintEnd_toEndOf="@id/form_person_phone_number"
                     app:layout_constraintStart_toStartOf="@id/form_person_phone_number"
                     app:layout_constraintTop_toBottomOf="@id/form_person_text_email" />
@@ -426,11 +445,11 @@
                         android:hint="@string/ex_cep"
                         android:inputType="number"
                         android:text="@={viewModel.personBinding.zipcode}"
-                        app:maskInput='@{"#####-###"}'
                         android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
                         app:layout_constraintBottom_toBottomOf="@id/form_person_neighborhood"
                         app:layout_constraintEnd_toEndOf="@id/form_person_complement"
-                        app:layout_constraintStart_toStartOf="@id/form_person_text_complement" />
+                        app:layout_constraintStart_toStartOf="@id/form_person_text_complement"
+                        app:maskInput='@{"#####-###"}' />
 
                     <TextView
                         android:id="@+id/form_person_text_state"
@@ -461,9 +480,9 @@
             android:id="@+id/form_person_button_back"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
             android:background="@drawable/button_negative_action"
             android:fontFamily="@font/bebasneue_bold"
             android:text="@string/voltar"
@@ -480,13 +499,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:background="@drawable/button_positive_active"
+            android:layout_marginEnd="8dp"
+            android:background='@{viewModel.formPersonValidators.isRight ? @drawable/button_positive_active :  @drawable/button_positive_inactive}'
+            android:clickable="@{viewModel.formPersonValidators.isRight}"
             android:fontFamily="@font/bebasneue_bold"
             android:onClick="@{toAddItems}"
             android:text="@string/avancar"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="@id/form_person_scrollable_items"
             app:layout_constraintStart_toEndOf="@id/form_person_button_back"
             app:layout_constraintTop_toTopOf="@id/form_person_button_back" />

@@ -9,6 +9,9 @@
         <variable
             name="person"
             type="com.example.geradorboletos.models.Person" />
+        <variable
+            name="inicials"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,7 +30,7 @@
             android:layout_margin="12dp"
             android:padding="12dp"
             android:textSize="24sp"
-            android:text="AA"
+            android:text="@{inicials}"
             android:fontFamily="@font/myriadpro_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

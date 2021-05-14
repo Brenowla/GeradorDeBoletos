@@ -73,6 +73,14 @@
             app:layout_constraintStart_toStartOf="@id/form_item_text_name"
             app:layout_constraintTop_toBottomOf="@id/form_item_text_name" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/form_item_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.55"
+            />
+
         <TextView
             android:id="@+id/form_item_text_value"
             android:layout_width="0dp"
@@ -87,8 +95,9 @@
             android:layout_height="wrap_content"
             android:text="@={viewModel.itemBinding.value}"
             app:moneyMask='@{"R$"}'
-            app:layout_constraintEnd_toStartOf="@+id/form_item_text_qtd"
+            app:layout_constraintEnd_toStartOf="@id/form_item_guideline"
             app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginEnd="4dp"
             app:layout_constraintStart_toStartOf="@id/form_item_text_value"
             app:layout_constraintTop_toBottomOf="@id/form_item_text_value" />
 
@@ -97,25 +106,57 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/quantidade"
-            app:layout_constraintEnd_toEndOf="@id/form_item_name"
-            app:layout_constraintHorizontal_bias="0.50"
-            app:layout_constraintStart_toEndOf="@id/form_item_text_value"
+            app:layout_constraintStart_toStartOf="@id/form_item_sub_button"
             app:layout_constraintTop_toTopOf="@id/form_item_text_value" />
+
+
+
+        <ImageButton
+            android:id="@+id/form_item_sub_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_subtraction"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/form_item_guideline"
+            app:layout_constraintTop_toTopOf="@id/form_item_qtd"
+            app:layout_constraintBottom_toBottomOf="@id/form_item_qtd"
+            app:layout_constraintEnd_toStartOf="@id/form_item_qtd"
+            android:background="@drawable/button_add_items"
+            />
 
         <EditText
             android:id="@+id/form_item_qtd"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            app:layout_constraintStart_toEndOf="@id/form_item_sub_button"
+            app:layout_constraintTop_toBottomOf="@id/form_item_text_qtd"
+            app:layout_constraintEnd_toStartOf="@id/form_item_add_button"
+            app:layout_constraintBottom_toBottomOf="@id/form_item_value"
+            tools:text="10"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:clickable="false"
+            android:background="@drawable/value_qtd"
             android:text="@={viewModel.itemBinding.amount}"
+            />
+
+        <ImageButton
+            android:id="@+id/form_item_add_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_add"
+            app:layout_constraintStart_toEndOf="@id/form_item_qtd"
+            app:layout_constraintTop_toTopOf="@id/form_item_qtd"
+            app:layout_constraintBottom_toBottomOf="@id/form_item_qtd"
             app:layout_constraintEnd_toEndOf="@id/form_item_name"
-            app:layout_constraintStart_toStartOf="@id/form_item_text_qtd"
-            app:layout_constraintTop_toBottomOf="@id/form_item_text_qtd" />
+            android:background="@drawable/button_add_items"
+            />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/form_item_button_back"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_negative_action"
@@ -141,7 +182,7 @@
             tools:text="Adicionar"
             android:textColor="@color/white"
             android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="@id/form_item_qtd"
+            app:layout_constraintEnd_toEndOf="@id/form_item_name"
             app:layout_constraintStart_toEndOf="@id/form_item_button_back"
             app:layout_constraintTop_toTopOf="@id/form_item_button_back" />
     </androidx.constraintlayout.widget.ConstraintLayout>

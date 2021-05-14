@@ -85,9 +85,15 @@ class PersonBinding(
         } else {
             null
         }
+        if(name.value == ""){
+            name.value = null
+        }
+        if(cpf.value == ""){
+            cpf.value = null
+        }
         this.person = Person(
-            name = name.value ?: "",
-            cpf = cpf.value?.let { Mask.replaceChars(it) } ?: "",
+            name = name.value,
+            cpf = cpf.value?.let { Mask.replaceChars(it) },
             phoneNumber = phoneNumber.value?.let { Mask.replaceChars(it) } ?: "",
             email = email.value ?: "",
             juridicalPerson = juridicalPerson,

@@ -66,6 +66,7 @@ class ListPersonAdapter @Inject constructor(private val context: Context) : Recy
         fun bind(person: Person) {
             this.person = person
             viewDataBinding.person = person
+            getInicials()
         }
 
         fun active() {
@@ -84,6 +85,17 @@ class ListPersonAdapter @Inject constructor(private val context: Context) : Recy
 
         override fun getLifecycle(): Lifecycle {
             return registry
+        }
+
+        fun getInicials(){
+            val str = if (person.name != null){
+               person.name!!.split(" ")
+            }
+            else{
+                person.juridicalPerson!!.corporateName.split(" ")
+            }
+            val inicials = str[0].get(0).toString() + str[str.size-1].get(0).toString()
+            viewDataBinding.inicials = inicials
         }
 
     }
