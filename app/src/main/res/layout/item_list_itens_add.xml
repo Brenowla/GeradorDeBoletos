@@ -18,18 +18,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="2dp">
+            app:cardElevation="2dp"
+            android:layout_marginBottom="8dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/dialog_card">
+                android:background="@drawable/item_add_item_shape"
+                >
 
                 <TextView
                     android:id="@+id/item_text_description"
@@ -37,6 +38,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/myriadpro_regular"
                     android:text="@string/descricao"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:textColor="#6E6F71"
                     android:textSize="14dp"
                     android:textStyle="bold"
@@ -129,7 +132,7 @@
                     android:background="@drawable/background_total_item"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/item_text_qtd"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/item_text_qtd" />
 
 
@@ -143,7 +146,7 @@
                     android:textColor="#6E6F71"
                     android:textSize="14dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/item_backgroud_text"
+                    app:layout_constraintStart_toStartOf="@id/item_text_qtd"
                     app:layout_constraintTop_toTopOf="@id/item_backgroud_text" />
 
                 <TextView

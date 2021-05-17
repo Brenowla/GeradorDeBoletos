@@ -43,6 +43,7 @@ class ConfirmationFragment : Fragment() {
         binding.backToFormPerson = View.OnClickListener { backToFormPerson() }
         binding.seePDF = View.OnClickListener { openPDF() }
         binding.share = View.OnClickListener { shareOnSocialMedia() }
+        binding.isJuridical = mainViewModel.costumer?.juridicalPerson != null
         return binding.root
     }
 

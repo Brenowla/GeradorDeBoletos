@@ -91,11 +91,14 @@ class PersonBinding(
         if(cpf.value == ""){
             cpf.value = null
         }
+        if(email.value == ""){
+            email.value = null
+        }
         this.person = Person(
             name = name.value,
             cpf = cpf.value?.let { Mask.replaceChars(it) },
             phoneNumber = phoneNumber.value?.let { Mask.replaceChars(it) } ?: "",
-            email = email.value ?: "",
+            email = email.value,
             juridicalPerson = juridicalPerson,
             address = address
         )

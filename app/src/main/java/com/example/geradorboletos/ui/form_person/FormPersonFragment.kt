@@ -55,7 +55,7 @@ class FormPersonFragment : Fragment() {
         binding.toListPerson = View.OnClickListener {
             toListPerson()
         }
-        //binding.verifications = verifications
+
         activity?.title = getString(R.string.emissao_boletos)
     }
 
@@ -73,24 +73,5 @@ class FormPersonFragment : Fragment() {
             controler.navigate(this)
         }
     }
-
-//    private val verifications = object : View.OnFocusChangeListener {
-//        override fun onFocusChange(v: View?, hasFocus: Boolean) {
-//            if (!hasFocus) {
-//                val result = when (v?.id) {
-//                    binding.formPersonFullName.id -> {
-//                        viewModel.verifyName()
-//                    }
-//                    else -> false
-//                }
-//                if (result) {
-//                    v?.background?.setTint(resources.getColor(R.color.sucess))
-//                } else {
-//                    v?.background?.setTint(resources.getColor(R.color.error))
-//                }
-//            }
-//        }
-//
-//    }
 
 }

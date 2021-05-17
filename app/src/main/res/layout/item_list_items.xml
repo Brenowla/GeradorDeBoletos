@@ -16,13 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{onClick}"
-        android:padding="16dp">
+        android:paddingTop="12dp">
 
         <TextView
             android:id="@+id/item_list_items_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+
+            android:layout_marginStart="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@{item.name}"
@@ -32,6 +33,7 @@
             tools:text="Fifa 2018"/>
 
         <TextView
+            android:id="@+id/item_list_items_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/item_list_items_name"
@@ -42,6 +44,17 @@
             android:textSize="16sp"
             android:fontFamily="@font/myriadpro_bold"
             />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:paddingTop="12dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_list_items_value"
+            android:background="@android:color/darker_gray"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

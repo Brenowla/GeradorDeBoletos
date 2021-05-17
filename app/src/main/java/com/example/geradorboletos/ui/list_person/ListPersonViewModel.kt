@@ -16,7 +16,12 @@ class ListPersonViewModel @Inject constructor(private val personRepository: Pers
    fun filterNames(search: Editable) {
       val search = search.toString()
       allPersonUpdateLive.value = allPerson.value?.filter { personData ->
-         personData.person.name != null && personData.person.name.toLowerCase().startsWith(search.toLowerCase())
+         if(personData.person.juridicalPerson != null){
+            personData.person.juridicalPerson.corporateName.toLowerCase().startsWith(search.toLowerCase())
+         }else {
+            personData.person.name != null && personData.person.name.toLowerCase()
+               .startsWith(search.toLowerCase())
+         }
       }
    }
 }

@@ -28,6 +28,10 @@
         <variable
             name="share"
             type="android.view.View.OnClickListener" />
+
+        <variable
+            name="isJuridical"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -157,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/myriadpro_regular"
-            android:text="@{person.name}"
+            android:text="@{isJuridical ? person.juridicalPerson.corporateName : person.name}"
             android:textColor="@color/grey_text"
             android:textSize="12sp"
             android:textStyle="bold"

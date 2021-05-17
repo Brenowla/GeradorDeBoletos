@@ -2,6 +2,8 @@ package com.example.geradorboletos.ui.add_items
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -154,6 +156,7 @@ class AddItemsFragment() : Fragment(){
             }
         }
         dialogBinding.dismiss = View.OnClickListener { dialog.dismiss() }
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 
@@ -174,7 +177,7 @@ class AddItemsFragment() : Fragment(){
         dialogBinding.dismiss = View.OnClickListener {
             dialog.dismiss()
         }
-
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
 }

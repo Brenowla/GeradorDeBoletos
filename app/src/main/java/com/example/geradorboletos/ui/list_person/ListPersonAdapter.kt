@@ -56,6 +56,7 @@ class ListPersonAdapter @Inject constructor(private val context: Context) : Recy
     inner class ViewHolder(val viewDataBinding: PersonItemListPersonBinding) : RecyclerView.ViewHolder(viewDataBinding.root), LifecycleOwner, View.OnClickListener {
 
         private lateinit var person: Person
+        private var isJuridical : Boolean = false
         private val registry = LifecycleRegistry(this)
 
         init {
@@ -66,6 +67,8 @@ class ListPersonAdapter @Inject constructor(private val context: Context) : Recy
         fun bind(person: Person) {
             this.person = person
             viewDataBinding.person = person
+            isJuridical = person.juridicalPerson != null
+            viewDataBinding.isJuridical = isJuridical
             getInicials()
         }
 
@@ -88,7 +91,7 @@ class ListPersonAdapter @Inject constructor(private val context: Context) : Recy
         }
 
         fun getInicials(){
-            val str = if (person.name != null){
+            val str = if (!isJuridical){
                person.name!!.split(" ")
             }
             else{

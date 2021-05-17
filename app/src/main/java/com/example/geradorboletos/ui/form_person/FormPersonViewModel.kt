@@ -32,19 +32,13 @@ class FormPersonViewModel @Inject constructor() : ViewModel() {
 
     fun updatePerson(person: Person){
         personBinding.update(person)
-        setValidFieldsForInputPerson(person)
-    }
-
-    private fun setValidFieldsForInputPerson(person: Person) {
-        if(person.name != null ) formPersonValidators.name.value = true
-        if(person.cpf != null) formPersonValidators.cpf.value = true
-        if(person.phoneNumber != null) formPersonValidators.phone.value = true
-        if(person.juridicalPerson != null){
-            formPersonValidators.cnpj.value = true
-            formPersonValidators.corporateName.value = true
+        if(person.juridicalPerson!= null){
+            switchIsJuridical(true)
         }
-        //Fazer para o address
-        formPersonValidators.verifyRight()
+        if (person.address != null){
+            onSwitchAdressClick(true)
+        }
+        formPersonValidators.setValidFieldsForInputPerson(person)
     }
 
     fun verifyName(): Boolean {

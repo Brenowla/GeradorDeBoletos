@@ -36,40 +36,37 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="8dp"
         android:background="@drawable/dialog_card">
 
-        <ImageView
-            android:id="@+id/form_item_blue_bar"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:src="@color/secondary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/form_item_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:paddingStart="8dp"
+            android:paddingVertical="16dp"
             android:text="@{title}"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@id/form_item_blue_bar"
-            app:layout_constraintTop_toTopOf="@id/form_item_blue_bar"
-            app:layout_constraintBottom_toBottomOf="@id/form_item_blue_bar"
-            tools:text="Adicionar um item" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/form_item_text_name"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Adicionar um item"
+            android:background="@drawable/top_corners"/>
 
         <TextView
             android:id="@+id/form_item_text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
             android:text="@string/nome"
             app:layout_constraintStart_toStartOf="@id/form_item_title"
-            app:layout_constraintTop_toBottomOf="@id/form_item_blue_bar" />
+            app:layout_constraintTop_toBottomOf="@id/form_item_title" />
 
         <EditText
             android:id="@+id/form_item_name"
