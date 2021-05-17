@@ -127,7 +127,10 @@ class AddItemsFragment() : Fragment(){
     private fun dialogFormItens(type: Int, position: Int) {
         val dialogBinding: FormItemBinding =
             DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.form_item, null, false)
+        dialogBinding.lifecycleOwner = this
         dialogBinding.viewModel = viewModel
+        dialogBinding.sub = View.OnClickListener { viewModel.removeQtd() }
+        dialogBinding.add = View.OnClickListener { viewModel.addQtd() }
         if (type == 0){
             dialogBinding.title = getString(R.string.add_item)
             dialogBinding.buttonText = getString(R.string.adicionar)
@@ -157,6 +160,7 @@ class AddItemsFragment() : Fragment(){
     private fun dialogRemoveItem(position: Int){
         val dialogBinding: DeleteItemDialogBinding =
             DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.delete_item_dialog, null, false)
+        dialogBinding.lifecycleOwner = this
         dialogBinding.nameitem = viewModel.getItemName(position)
 
         val builder = AlertDialog.Builder(context)

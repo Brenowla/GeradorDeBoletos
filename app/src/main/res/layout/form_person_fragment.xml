@@ -289,7 +289,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:afterTextChanged="@{viewModel.formPersonValidators::emailValidator}"
-                    android:fontFamily="@font/myriadpro_bold"
                     android:inputType="textEmailAddress"
                     android:maxLength="100"
                     android:text="@={viewModel.personBinding.email}"

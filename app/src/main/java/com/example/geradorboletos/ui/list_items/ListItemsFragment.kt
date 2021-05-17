@@ -42,6 +42,8 @@ class ListItemsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = ListItemsFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
         return binding.root
     }
 
@@ -53,6 +55,9 @@ class ListItemsFragment : Fragment() {
 
     private fun getAllItems() {
         viewModel.allItems.observe(viewLifecycleOwner, Observer {
+            listItemsAdapter.updateList(it)
+        })
+        viewModel.allItensUpdated.observe(viewLifecycleOwner, Observer {
             listItemsAdapter.updateList(it)
         })
     }

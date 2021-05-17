@@ -43,7 +43,7 @@ class Mask {
 
                     var i = 0
                     for (m: Char in mask.toCharArray()) {
-                        if (m != '#' && str.length > oldString.length) {
+                        if (m != '#' && str.length >= oldString.length) {
                             fieldWithMask += m
                             continue
                         }

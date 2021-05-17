@@ -81,39 +81,6 @@
             app:layout_constraintStart_toStartOf="@id/add_items_bar_1"
             app:layout_constraintTop_toBottomOf="@id/add_items_bar_1" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_items_button_add"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="12dp"
-            android:background="@drawable/button_add_items"
-            android:fontFamily="@font/myriadpro_semibold"
-            android:onClick="@{addItemListener}"
-            android:text="@string/adicionar_item"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/add_item_button_search_item"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="@+id/add_items_text_what_to"
-            app:layout_constraintTop_toBottomOf="@+id/add_items_text_what_to" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_item_button_search_item"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/button_add_items"
-            android:fontFamily="@font/myriadpro_semibold"
-            android:text="@string/consultar_item"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:onClick="@{toListItems}"
-            app:layout_constraintEnd_toEndOf="@id/add_item_bar_3"
-            app:layout_constraintStart_toEndOf="@id/add_items_button_add"
-            app:layout_constraintTop_toTopOf="@id/add_items_button_add" />
 
         <LinearLayout
             android:id="@+id/add_items_card"
@@ -121,10 +88,10 @@
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toTopOf="@id/add_items_button_back"
+            app:layout_constraintBottom_toTopOf="@id/add_items_button_add"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/add_items_button_add"
-            app:layout_constraintTop_toBottomOf="@id/add_items_button_add">
+            app:layout_constraintStart_toStartOf="@id/add_items_text_what_to"
+            app:layout_constraintTop_toBottomOf="@id/add_items_text_what_to">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/form_items_card_view"
@@ -157,6 +124,42 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_items_button_add"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_add_items"
+            android:fontFamily="@font/myriadpro_semibold"
+            android:onClick="@{addItemListener}"
+            android:text="@string/adicionar_item"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/add_item_button_search_item"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="@+id/add_items_card"
+            app:layout_constraintTop_toBottomOf="@+id/add_items_card"
+            app:layout_constraintBottom_toTopOf="@id/add_items_button_back"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_item_button_search_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/button_add_items"
+            android:fontFamily="@font/myriadpro_semibold"
+            android:text="@string/consultar_item"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:onClick="@{toListItems}"
+            app:layout_constraintEnd_toEndOf="@id/add_item_bar_3"
+            app:layout_constraintStart_toEndOf="@id/add_items_button_add"
+            app:layout_constraintTop_toTopOf="@id/add_items_button_add" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/add_items_button_back"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -178,9 +181,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:background="@drawable/button_positive_active"
+            android:background="@{viewModel.listItemsData.size() > 0 ? @drawable/button_positive_active : @drawable/button_positive_inactive}"
             android:fontFamily="@font/bebasneue_bold"
             android:onClick="@{toAditionalItems}"
+            android:clickable="@{viewModel.listItemsData.size() > 0 }"
             android:text="@string/avancar"
             android:textColor="@color/white"
             android:textSize="24sp"

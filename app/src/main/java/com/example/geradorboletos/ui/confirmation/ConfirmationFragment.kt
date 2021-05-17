@@ -1,6 +1,10 @@
 package com.example.geradorboletos.ui.confirmation
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,7 +39,10 @@ class ConfirmationFragment : Fragment() {
         binding = ConfirmationFragmentBinding.inflate(inflater, container, false)
         binding.chargeresponse = mainViewModel.chargeResponse
         binding.person = mainViewModel.costumer
+        binding.copy = View.OnClickListener { copyBarcodeToClipboard() }
         binding.backToFormPerson = View.OnClickListener { backToFormPerson() }
+        binding.seePDF = View.OnClickListener { openPDF() }
+        binding.share = View.OnClickListener { shareOnSocialMedia() }
         return binding.root
     }
 
@@ -51,9 +58,26 @@ class ConfirmationFragment : Fragment() {
         MainActivity.mainComponent.confirmationComponent().create().inject(this)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    private fun copyBarcodeToClipboard(){
+        val clipboardManager : ClipboardManager = activity?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipData = ClipData.newPlainText("barcode", mainViewModel.chargeResponse?.data?.barcode)
+        clipboardManager.setPrimaryClip(clipData)
+    }
 
+    private fun openPDF() {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(mainViewModel.chargeResponse?.data?.pdf?.charge ?: ""))
+        startActivity(browserIntent)
+    }
+
+    private fun shareOnSocialMedia(){
+        val text = viewModel.makeSharedText(mainViewModel.chargeResponse)
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, text)
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 
 }

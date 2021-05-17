@@ -37,6 +37,8 @@ class ListPersonFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = ListPersonFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
         return binding.root
     }
 
@@ -53,6 +55,9 @@ class ListPersonFragment : Fragment() {
 
     private fun getAllperson() {
         viewModel.allPerson.observe(viewLifecycleOwner, {
+            listPersonAdapter.updateList(it)
+        })
+        viewModel.allPersonUpdateLive.observe(viewLifecycleOwner,{
             listPersonAdapter.updateList(it)
         })
     }

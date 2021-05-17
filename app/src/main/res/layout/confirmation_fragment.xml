@@ -4,14 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="chargeresponse"
             type="com.example.geradorboletos.models.ChargeResponse" />
+
         <variable
             name="person"
             type="com.example.geradorboletos.models.Person" />
+
         <variable
             name="backToFormPerson"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="copy"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="seePDF"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="share"
             type="android.view.View.OnClickListener" />
     </data>
 
@@ -87,12 +102,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/myriadpro_regular"
+            android:text="@{chargeresponse.data.expireAt}"
             android:textColor="@color/grey_text"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/confirmation_text_limit_data"
             app:layout_constraintTop_toBottomOf="@id/confirmation_text_limit_data"
-            android:text="@{chargeresponse.expireAt}"
             tools:text="02/02/2018" />
 
         <TextView
@@ -120,7 +135,7 @@
             app:layout_constraintStart_toStartOf="@id/confirmation_text_value"
             app:layout_constraintTop_toBottomOf="@id/confirmation_text_value"
             app:moneyMask='@{"R$"}'
-            app:valueField="@{Integer.toString(chargeresponse.total)}"
+            app:valueField="@{Integer.toString(chargeresponse.data.total)}"
             tools:text="R$ 1.0000" />
 
         <TextView
@@ -142,12 +157,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/myriadpro_regular"
+            android:text="@{person.name}"
             android:textColor="@color/grey_text"
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/confirmation_text_destination"
             app:layout_constraintTop_toBottomOf="@id/confirmation_text_destination"
-            android:text="@{person.name}"
             tools:text="Gorbadock Oldbuck" />
 
 
@@ -171,13 +186,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/bebasneue_bold"
+            android:text="@{chargeresponse.data.barcode}"
             android:textColor="@color/grey_text"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/confirmation_bar_3"
             app:layout_constraintStart_toStartOf="@id/confirmation_bar_1"
             app:layout_constraintTop_toBottomOf="@id/confirmation_text_barcode"
-            android:text="@{chargeresponse.data.barcode}"
             tools:text="00000.00000 00000.000000 00000.000000 0 00000000000000" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -187,6 +202,7 @@
             android:layout_marginTop="32dp"
             android:background="@drawable/button_options_confirmation"
             android:fontFamily="@font/myriadpro_bold"
+            android:onClick="@{copy}"
             android:text="@string/copiar_codigo"
             android:textAllCaps="false"
             android:textColor="@color/secondary"
@@ -202,6 +218,7 @@
             android:layout_marginTop="4dp"
             android:background="@drawable/button_options_confirmation"
             android:fontFamily="@font/myriadpro_bold"
+            android:onClick="@{share}"
             android:text="@string/compartilhar"
             android:textAllCaps="false"
             android:textColor="@color/secondary"
@@ -217,6 +234,7 @@
             android:layout_marginTop="4dp"
             android:background="@drawable/button_options_confirmation"
             android:fontFamily="@font/myriadpro_bold"
+            android:onClick="@{seePDF}"
             android:text="@string/ver_boleto"
             android:textAllCaps="false"
             android:textColor="@color/secondary"
@@ -229,18 +247,18 @@
             android:id="@+id/confirmation_button_done"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/button_positive_active"
             android:fontFamily="@font/bebasneue_bold"
+            android:onClick="@{backToFormPerson}"
             android:text="@string/concluir"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:onClick="@{backToFormPerson}"
-            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/confirmation_bar_3"
             app:layout_constraintStart_toStartOf="@id/confirmation_bar_1"
             app:layout_constraintTop_toTopOf="@id/confirmation_button_see_more"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="1.0"/>
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

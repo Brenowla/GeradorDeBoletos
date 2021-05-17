@@ -14,6 +14,9 @@
         <variable
             name="backToAddItens"
             type="android.view.View.OnClickListener" />
+        <variable
+            name="datePicker"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,7 +80,26 @@
             app:layout_constraintStart_toStartOf="@id/adtional_information_text_data"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
+            android:inputType="number"
             android:text="@={viewModel.expireAt}"
+            app:colorChanger="@{viewModel.validExpireAt}"
+            android:afterTextChanged="@{viewModel::validateExpireAt}"
+            app:maskInput='@{"##/##/####"}'
+            />
+
+        <ImageButton
+            android:id="@+id/aditional_information_button_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintEnd_toEndOf="@id/aditional_information_data"
+            app:layout_constraintTop_toTopOf="@id/aditional_information_data"
+            app:layout_constraintBottom_toBottomOf="@id/aditional_information_data"
+            android:src="@drawable/ic_calendar"
+            android:backgroundTint="@color/white"
+            android:onClick="@{datePicker}"
             />
 
         <TextView
@@ -109,7 +131,7 @@
             android:textStyle="bold"
             app:moneyMask='@{"R$"}'
             app:valueField="@{Integer.toString(viewModel.totalValue)}"
-            tools:text="R$ 500000"
+            tools:text="R$ 5000,00"
             />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -141,7 +163,8 @@
             android:onClick="@{toSendCharge}"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:background="@drawable/button_positive_active"
+            android:background='@{viewModel.validExpireAt ? @drawable/button_positive_active :  @drawable/button_positive_inactive}'
+            android:clickable="@{viewModel.validExpireAt}"
             android:fontFamily="@font/bebasneue_bold"
             />
 

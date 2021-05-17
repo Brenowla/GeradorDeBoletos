@@ -10,7 +10,7 @@ class MoneyMask {
     companion object {
 
         fun replaceCharsReal(field: String): String {
-            return field.replace("[R$,.]".toRegex(), "")
+            return field.replace("[R$,. ]".toRegex(), "")
         }
 
         fun mask(type: String ,text: EditText): TextWatcher {
@@ -29,11 +29,11 @@ class MoneyMask {
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                     if (s.toString() != current) {
                         text.removeTextChangedListener(this)
-                        val cleanString = s.toString().replace("[${type},.]".toRegex(), "")
+                        val cleanString = s.toString().replace("[${type},. ]".toRegex(), "")
                         val parsed = cleanString.toDouble()
                         val formatted: String =
                             NumberFormat.getCurrencyInstance().format(parsed / 100)
-                        current = type+formatted.replace("[${type}]".toRegex(), "")
+                        current = "$type ${formatted.replace("[${type} ]".toRegex(), "")}"
                         text.setText(current)
                         text.setSelection(current.length)
                         text.addTextChangedListener(this)
