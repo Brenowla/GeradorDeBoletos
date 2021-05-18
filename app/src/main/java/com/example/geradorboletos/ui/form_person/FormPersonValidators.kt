@@ -185,6 +185,9 @@ class FormPersonValidators {
             cnpj.value = true
             corporateName.value = true
         }
+        if(person.address != null){
+            zipcode.value = true
+        }
         //Fazer para o address
         verifyRight()
     }

@@ -37,6 +37,7 @@ class ConfirmationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = ConfirmationFragmentBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
         binding.chargeresponse = mainViewModel.chargeResponse
         binding.person = mainViewModel.costumer
         binding.copy = View.OnClickListener { copyBarcodeToClipboard() }

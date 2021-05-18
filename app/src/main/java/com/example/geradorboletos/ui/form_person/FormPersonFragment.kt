@@ -48,8 +48,14 @@ class FormPersonFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.formPersonState.adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, ListStates.States)
+        binding.formPersonState.onItemSelectedListener = SpinnerStatesAdapter(listenerSpinner)
+
         mainViewModel.costumer?.let {
             viewModel.updatePerson(it)
+            it.address?.state?.let {
+                binding.formPersonState.setSelection(ListStates.findPositionByInicials(it))
+            }
         }
         binding.toAddItems = View.OnClickListener {
             toAddItems()
@@ -57,9 +63,6 @@ class FormPersonFragment : Fragment() {
         binding.toListPerson = View.OnClickListener {
             toListPerson()
         }
-
-        binding.formPersonState.adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, ListStates.States)
-        binding.formPersonState.onItemSelectedListener = SpinnerStatesAdapter(listenerSpinner)
 
         activity?.title = getString(R.string.emissao_boletos)
     }
@@ -72,7 +75,6 @@ class FormPersonFragment : Fragment() {
                 viewModel.validState(position)
             }
         }
-
     }
 
     private fun toAddItems() {

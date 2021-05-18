@@ -29,7 +29,6 @@ class AditionalInformationFragment : Fragment() {
         findNavController()
     }
 
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 

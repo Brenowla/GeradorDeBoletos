@@ -34,6 +34,7 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/form_person_button_back"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -382,6 +383,7 @@
                         android:layout_height="wrap_content"
                         android:afterTextChanged="@{viewModel.formPersonValidators::numberValidator}"
                         android:inputType="number"
+                        android:maxLength="8"
                         android:text="@={viewModel.personBinding.number}"
                         android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
                         app:colorChanger="@{viewModel.formPersonValidators.number}"
@@ -457,6 +459,7 @@
                         android:afterTextChanged="@{viewModel.formPersonValidators::zipcodeValidator}"
                         android:hint="@string/ex_cep"
                         android:inputType="number"
+                        android:maxLength="9"
                         android:text="@={viewModel.personBinding.zipcode}"
                         android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
                         app:colorChanger="@{viewModel.formPersonValidators.zipcode}"

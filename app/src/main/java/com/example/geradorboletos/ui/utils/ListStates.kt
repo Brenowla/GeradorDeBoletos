@@ -32,5 +32,14 @@ class ListStates {
             "(SE) Sergipe",
             "(TO) Tocantins"
         )
+
+        fun findPositionByInicials(inicials: String): Int{
+            for (i in 1..States.size) {
+                if(States[i].substring(1,3) == inicials){
+                    return i
+                }
+            }
+            return 0
+        }
     }
 }
