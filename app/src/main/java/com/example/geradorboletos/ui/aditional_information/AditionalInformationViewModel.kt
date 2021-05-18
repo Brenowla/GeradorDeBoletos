@@ -13,10 +13,12 @@ class AditionalInformationViewModel @Inject constructor() : ViewModel() {
         it.value = ""
     }
     val validExpireAt = MutableLiveData<Boolean>()
-//    val isRight : MutableLiveData<Boolean> = MutableLiveData<Boolean>().also {
-//        it.value = false
-//    }
+
     var totalValue = 0
+
+    val hasAditionalFields: MutableLiveData<Boolean> = MutableLiveData<Boolean>().also {
+        it.value = false
+    }
 
     fun updateExpireAt(expireAt: String){
         this.expireAt.value = expireAt
@@ -27,6 +29,10 @@ class AditionalInformationViewModel @Inject constructor() : ViewModel() {
         for (i in items) {
             totalValue += i.value*i.amount
         }
+    }
+
+    fun onSwitchAdressClick(checked: Boolean){
+        hasAditionalFields.value = checked
     }
 
     fun validateExpireAt(expireAt: Editable){

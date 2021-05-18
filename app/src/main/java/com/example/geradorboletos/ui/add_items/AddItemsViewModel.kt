@@ -14,6 +14,7 @@ class AddItemsViewModel @Inject constructor(context: Context) : ViewModel() {
     val listItemsData: MutableLiveData<List<Item>> = MutableLiveData<List<Item>>().also {
         it.value = listItems
     }
+    val formItemValidator = AddItemValidators()
     var listSize = 0
 
     fun updateList(items: ArrayList<Item>){

@@ -74,6 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@={viewModel.itemBinding.name}"
+            android:afterTextChanged="@{viewModel.formItemValidator::nameValidator}"
+            app:colorChanger="@{viewModel.formItemValidator.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/form_item_text_name"
             app:layout_constraintTop_toBottomOf="@id/form_item_text_name" />
@@ -100,6 +102,8 @@
             android:layout_height="wrap_content"
             android:text="@={viewModel.itemBinding.value}"
             app:moneyMask='@{"R$"}'
+            android:afterTextChanged="@{viewModel.formItemValidator::valueValidator}"
+            app:colorChanger="@{viewModel.formItemValidator.value}"
             app:layout_constraintEnd_toStartOf="@id/form_item_guideline"
             app:layout_constraintHorizontal_bias="0.0"
             android:layout_marginEnd="4dp"
@@ -182,7 +186,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:background="@drawable/button_positive_active"
+            android:background='@{viewModel.formItemValidator.isRight ? @drawable/button_positive_active :  @drawable/button_positive_inactive}'
+            android:clickable="@{viewModel.formItemValidator.isRight}"
             android:fontFamily="@font/bebasneue_bold"
             android:onClick="@{action}"
             android:text="@{buttonText}"

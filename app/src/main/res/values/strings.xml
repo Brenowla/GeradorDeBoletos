@@ -55,4 +55,7 @@
     <string name="concluir">Concluir</string>
     <string name="pesquise_por_pessoa">Pesquise por pessoa</string>
     <string name="pesquise_por_item">Pesquise por pessoa</string>
+    <string name="cidade">Cidade</string>
+    <string name="exibir_campos_adicionais">Exibir campos adicionais</string>
+    <string name="desconto">Desconto</string>
 </resources>

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.geradorboletos.models.Person
 import com.example.geradorboletos.ui.databinding.PersonBinding
+import com.example.geradorboletos.ui.utils.ListStates
 import javax.inject.Inject
 
 class FormPersonViewModel @Inject constructor() : ViewModel() {
@@ -21,6 +22,7 @@ class FormPersonViewModel @Inject constructor() : ViewModel() {
 
     fun onSwitchAdressClick(checked: Boolean){
         hasAdress.value = checked
+        formPersonValidators.updateAdress(checked)
     }
 
     fun switchIsJuridical(change: Boolean){
@@ -41,14 +43,14 @@ class FormPersonViewModel @Inject constructor() : ViewModel() {
         formPersonValidators.setValidFieldsForInputPerson(person)
     }
 
-    fun verifyName(): Boolean {
-        if(empty(personBinding.name.value)) return false
-        return true
+    fun invalidState() {
+        personBinding.state.value = ""
+        formPersonValidators.stateValidator(false)
     }
 
-    fun empty(text: String?): Boolean {
-        if (text == null) return false
-        return text.isBlank()
+    fun validState(position: Int) {
+        personBinding.state.value = ListStates.States[position].substring(1,3)
+        formPersonValidators.stateValidator(true)
     }
 
 }

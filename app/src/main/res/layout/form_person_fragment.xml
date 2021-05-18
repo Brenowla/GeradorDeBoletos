@@ -337,6 +337,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="@id/form_person_email"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@id/form_person_email"
                     app:layout_constraintTop_toBottomOf="@id/form_person_text_address">
 
@@ -356,8 +357,10 @@
                         android:id="@+id/form_person_street"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:afterTextChanged="@{viewModel.formPersonValidators::streetValidator}"
                         android:text="@={viewModel.personBinding.street}"
                         android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                        app:colorChanger="@{viewModel.formPersonValidators.street}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/form_person_text_street"
                         app:layout_constraintTop_toBottomOf="@id/form_person_text_street" />
@@ -377,9 +380,11 @@
                         android:id="@+id/form_person_number"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:afterTextChanged="@{viewModel.formPersonValidators::numberValidator}"
                         android:inputType="number"
                         android:text="@={viewModel.personBinding.number}"
                         android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                        app:colorChanger="@{viewModel.formPersonValidators.number}"
                         app:layout_constraintEnd_toStartOf="@id/form_person_complement"
                         app:layout_constraintStart_toStartOf="@id/form_person_text_number"
                         app:layout_constraintTop_toBottomOf="@id/form_person_text_number" />
@@ -401,8 +406,10 @@
                         android:id="@+id/form_person_complement"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:afterTextChanged="@{viewModel.formPersonValidators::complementValidator}"
                         android:text="@={viewModel.personBinding.complement}"
                         android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                        app:colorChanger="@{viewModel.formPersonValidators.complement}"
                         app:layout_constraintBottom_toBottomOf="@id/form_person_number"
                         app:layout_constraintEnd_toEndOf="@id/form_person_street"
                         app:layout_constraintStart_toStartOf="@id/form_person_text_complement" />
@@ -422,8 +429,10 @@
                         android:id="@+id/form_person_neighborhood"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:afterTextChanged="@{viewModel.formPersonValidators::neighborhoodValidator}"
                         android:text="@={viewModel.personBinding.neighborhood}"
                         android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                        app:colorChanger="@{viewModel.formPersonValidators.neighborhood}"
                         app:layout_constraintEnd_toStartOf="@id/form_person_cep"
                         app:layout_constraintStart_toStartOf="@id/form_person_text_neighborhood"
                         app:layout_constraintTop_toBottomOf="@id/form_person_text_neighborhood" />
@@ -445,14 +454,40 @@
                         android:id="@+id/form_person_cep"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:afterTextChanged="@{viewModel.formPersonValidators::zipcodeValidator}"
                         android:hint="@string/ex_cep"
                         android:inputType="number"
                         android:text="@={viewModel.personBinding.zipcode}"
                         android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                        app:colorChanger="@{viewModel.formPersonValidators.zipcode}"
                         app:layout_constraintBottom_toBottomOf="@id/form_person_neighborhood"
                         app:layout_constraintEnd_toEndOf="@id/form_person_complement"
                         app:layout_constraintStart_toStartOf="@id/form_person_text_complement"
                         app:maskInput='@{"#####-###"}' />
+
+
+                    <TextView
+                        android:id="@+id/form_person_text_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/myriadpro_bold"
+                        android:text="@string/cidade"
+                        android:textColor="#95989A"
+                        android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                        app:layout_constraintStart_toStartOf="@id/form_person_neighborhood"
+                        app:layout_constraintTop_toBottomOf="@id/form_person_neighborhood" />
+
+                    <EditText
+                        android:id="@+id/form_person_city"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:afterTextChanged="@{viewModel.formPersonValidators::cityValidator}"
+                        android:text="@={viewModel.personBinding.city}"
+                        android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
+                        app:colorChanger="@{viewModel.formPersonValidators.city}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/form_person_text_city"
+                        app:layout_constraintTop_toBottomOf="@id/form_person_text_city" />
 
                     <TextView
                         android:id="@+id/form_person_text_state"
@@ -462,15 +497,13 @@
                         android:text="Estado"
                         android:textColor="#95989A"
                         android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
-                        app:layout_constraintStart_toStartOf="@id/form_person_neighborhood"
-                        app:layout_constraintTop_toBottomOf="@+id/form_person_neighborhood" />
+                        app:layout_constraintStart_toStartOf="@id/form_person_city"
+                        app:layout_constraintTop_toBottomOf="@+id/form_person_city" />
 
                     <Spinner
                         android:id="@+id/form_person_state"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:entries="@array/states_array"
-
                         android:visibility="@{viewModel.hasAdress ? View.VISIBLE : View.GONE}"
                         app:layout_constraintEnd_toEndOf="@id/form_person_complement"
                         app:layout_constraintStart_toStartOf="@id/form_person_text_state"

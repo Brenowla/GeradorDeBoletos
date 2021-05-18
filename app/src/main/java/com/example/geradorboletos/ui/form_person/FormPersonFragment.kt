@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +14,7 @@ import com.example.geradorboletos.R
 import com.example.geradorboletos.databinding.FormPersonFragmentBinding
 import com.example.geradorboletos.ui.MainActivity
 import com.example.geradorboletos.ui.MainViewModel
+import com.example.geradorboletos.ui.utils.ListStates
 import javax.inject.Inject
 
 class FormPersonFragment : Fragment() {
@@ -56,7 +58,21 @@ class FormPersonFragment : Fragment() {
             toListPerson()
         }
 
+        binding.formPersonState.adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, ListStates.States)
+        binding.formPersonState.onItemSelectedListener = SpinnerStatesAdapter(listenerSpinner)
+
         activity?.title = getString(R.string.emissao_boletos)
+    }
+
+    private val listenerSpinner = object : ListenerSpinner {
+        override fun onSelection(position: Int) {
+            if(position == 0){
+                viewModel.invalidState()
+            }else {
+                viewModel.validState(position)
+            }
+        }
+
     }
 
     private fun toAddItems() {

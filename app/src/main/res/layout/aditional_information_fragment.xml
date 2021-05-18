@@ -19,96 +19,182 @@
             type="android.view.View.OnClickListener" />
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/aditional_information_bar_1"
+        <ScrollView
+            android:id="@+id/aditional_information_data_fields"
             android:layout_width="0dp"
-            android:layout_height="5dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:background="#FFFFFF"
-            app:layout_constraintEnd_toStartOf="@id/aditional_information_bar_2"
-            app:layout_constraintHorizontal_chainStyle="spread"
+            android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@color/sucess" />
+            app:layout_constraintBottom_toTopOf="@id/aditional_information_value">
 
-        <ImageView
-            android:id="@+id/aditional_information_bar_2"
-            android:layout_width="0dp"
-            android:layout_height="5dp"
-            android:layout_marginStart="8dp"
-            android:background="#FFFFFF"
-            app:layout_constraintEnd_toStartOf="@id/aditional_information_bar_3"
-            app:layout_constraintStart_toEndOf="@id/aditional_information_bar_1"
-            app:layout_constraintTop_toTopOf="@id/aditional_information_bar_1"
-            app:srcCompat="@color/sucess" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/aditional_information_bar_3"
-            android:layout_width="0dp"
-            android:layout_height="5dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/aditional_information_bar_2"
-            app:layout_constraintTop_toTopOf="@id/aditional_information_bar_2"
-            app:srcCompat="@color/actual_step" />
+                <ImageView
+                    android:id="@+id/aditional_information_bar_1"
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#FFFFFF"
+                    app:layout_constraintEnd_toStartOf="@id/aditional_information_bar_2"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@color/sucess" />
 
-        <TextView
-            android:id="@+id/adtional_information_text_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/defina_o_vencimento"
-            android:layout_marginTop="20dp"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@id/aditional_information_bar_1"
-            app:layout_constraintTop_toBottomOf="@id/aditional_information_bar_1"
-            android:fontFamily="@font/myriadpro_regular"
-            android:textStyle="bold"
-            />
+                <ImageView
+                    android:id="@+id/aditional_information_bar_2"
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_marginStart="8dp"
+                    android:background="#FFFFFF"
+                    app:layout_constraintEnd_toStartOf="@id/aditional_information_bar_3"
+                    app:layout_constraintStart_toEndOf="@id/aditional_information_bar_1"
+                    app:layout_constraintTop_toTopOf="@id/aditional_information_bar_1"
+                    app:srcCompat="@color/sucess" />
 
-        <EditText
-            android:id="@+id/aditional_information_data"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/adtional_information_text_data"
-            app:layout_constraintStart_toStartOf="@id/adtional_information_text_data"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            android:inputType="number"
-            android:text="@={viewModel.expireAt}"
-            app:colorChanger="@{viewModel.validExpireAt}"
-            android:afterTextChanged="@{viewModel::validateExpireAt}"
-            app:maskInput='@{"##/##/####"}'
-            />
+                <ImageView
+                    android:id="@+id/aditional_information_bar_3"
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="#FFFFFF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/aditional_information_bar_2"
+                    app:layout_constraintTop_toTopOf="@id/aditional_information_bar_2"
+                    app:srcCompat="@color/actual_step" />
 
-        <ImageButton
-            android:id="@+id/aditional_information_button_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="4dp"
-            app:layout_constraintEnd_toEndOf="@id/aditional_information_data"
-            app:layout_constraintTop_toTopOf="@id/aditional_information_data"
-            app:layout_constraintBottom_toBottomOf="@id/aditional_information_data"
-            android:src="@drawable/ic_calendar"
-            android:backgroundTint="@color/white"
-            android:onClick="@{datePicker}"
-            />
+                <TextView
+                    android:id="@+id/adtional_information_text_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/defina_o_vencimento"
+                    android:layout_marginTop="20dp"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="@id/aditional_information_bar_1"
+                    app:layout_constraintTop_toBottomOf="@id/aditional_information_bar_1"
+                    android:fontFamily="@font/myriadpro_regular"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:id="@+id/aditional_information_data"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/adtional_information_text_data"
+                    app:layout_constraintStart_toStartOf="@id/adtional_information_text_data"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    android:inputType="number"
+                    android:textSize="12sp"
+                    android:hint="Dia/Mês/Ano"
+                    android:text="@={viewModel.expireAt}"
+                    app:colorChanger="@{viewModel.validExpireAt}"
+                    android:afterTextChanged="@{viewModel::validateExpireAt}"
+                    app:maskInput='@{"##/##/####"}'
+                    />
+
+                <ImageButton
+                    android:id="@+id/aditional_information_button_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintEnd_toEndOf="@id/aditional_information_data"
+                    app:layout_constraintTop_toTopOf="@id/aditional_information_data"
+                    app:layout_constraintBottom_toBottomOf="@id/aditional_information_data"
+                    android:src="@drawable/ic_calendar"
+                    android:backgroundTint="@color/white"
+                    android:onClick="@{datePicker}"
+                    />
+
+                <TextView
+                    android:id="@+id/aditional_information_text_aditional_fields"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/exibir_campos_adicionais"
+                    android:textSize="12sp"
+                    android:layout_marginTop="24dp"
+                    android:textColor="@color/grey_text"
+                    android:fontFamily="@font/myriadpro_bold"
+                    app:layout_constraintStart_toStartOf="@id/aditional_information_data"
+                    app:layout_constraintTop_toBottomOf="@id/aditional_information_data"
+                    app:layout_constraintEnd_toStartOf="@id/aditional_information_switch_fields"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"/>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/aditional_information_switch_fields"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/aditional_information_text_aditional_fields"
+                    app:layout_constraintTop_toTopOf="@id/aditional_information_text_aditional_fields"
+                    app:layout_constraintBottom_toBottomOf="@id/aditional_information_text_aditional_fields"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp"
+                    android:onCheckedChanged="@{(switch, checked) -> viewModel.onSwitchAdressClick(checked)}"
+                    />
+
+                <TextView
+                    android:id="@+id/adtional_information_text_shipings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Frete"
+                    app:layout_constraintStart_toStartOf="@id/aditional_information_text_aditional_fields"
+                    app:layout_constraintTop_toBottomOf="@id/aditional_information_text_aditional_fields"
+                    android:layout_marginTop="20dp"
+                    android:visibility="@{viewModel.hasAditionalFields ? View.VISIBLE : View.GONE}"
+                    android:textColor="@color/grey_text"
+                    android:fontFamily="@font/myriadpro_bold"
+                    />
+
+                <EditText
+                    android:id="@+id/aditional_information_shipings"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/adtional_information_text_shipings"
+                    app:layout_constraintTop_toBottomOf="@id/adtional_information_text_shipings"
+                    app:moneyMask='@{"R$"}'
+                    app:layout_constraintEnd_toStartOf="@id/aditional_information_text_discount"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="@{viewModel.hasAditionalFields ? View.VISIBLE : View.GONE}"
+                    />
+
+                <TextView
+                    android:id="@+id/aditional_information_text_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/desconto"
+                    app:layout_constraintStart_toEndOf="@id/adtional_information_text_shipings"
+                    app:layout_constraintTop_toTopOf="@id/adtional_information_text_shipings"
+                    app:layout_constraintEnd_toEndOf="@id/aditional_information_bar_3"
+                    android:textColor="@color/grey_text"
+                    android:fontFamily="@font/myriadpro_bold"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
 
         <TextView
             android:id="@+id/aditional_information_text_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="@string/valor_total_da_cobranca"
             app:layout_constraintBottom_toTopOf="@id/aditional_information_button_back"
-            app:layout_constraintStart_toStartOf="@id/aditional_information_data"
+            app:layout_constraintStart_toStartOf="@id/aditional_information_data_fields"
             app:layout_constraintEnd_toStartOf="@id/aditional_information_value"
             android:textSize="16sp"
             android:layout_marginBottom="16dp"
@@ -121,9 +207,10 @@
             android:id="@+id/aditional_information_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             app:layout_constraintTop_toTopOf="@id/aditional_information_text_value"
             app:layout_constraintStart_toEndOf="@id/aditional_information_text_value"
-            app:layout_constraintEnd_toEndOf="@id/aditional_information_bar_3"
+            app:layout_constraintEnd_toEndOf="@id/aditional_information_data_fields"
             app:layout_constraintBottom_toBottomOf="@id/aditional_information_text_value"
             android:textSize="24sp"
             android:fontFamily="@font/myriadpro_regular"
@@ -155,7 +242,8 @@
             android:id="@+id/aditional_information_button_next"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/aditional_information_data"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="@id/aditional_information_data_fields"
             app:layout_constraintTop_toTopOf="@id/aditional_information_button_back"
             app:layout_constraintStart_toEndOf="@id/aditional_information_button_back"
             android:layout_marginLeft="4dp"

@@ -4,10 +4,7 @@ import android.text.Editable
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.geradorboletos.models.Person
-import com.example.geradorboletos.ui.utils.validators.CNPJValidator
-import com.example.geradorboletos.ui.utils.validators.CPFValidator
-import com.example.geradorboletos.ui.utils.validators.EmailValidator
-import com.example.geradorboletos.ui.utils.validators.PhoneValidator
+import com.example.geradorboletos.ui.utils.validators.*
 
 class FormPersonValidators {
 
@@ -17,6 +14,13 @@ class FormPersonValidators {
     val email : MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val cnpj : MutableLiveData<Boolean> = MutableLiveData<Boolean>()
     val corporateName: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val street: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val number: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val neighborhood: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val zipcode: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val city: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val complement: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+    val state: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
     val isRight : MutableLiveData<Boolean> = MutableLiveData<Boolean>().also {
         it.value = false
@@ -74,9 +78,67 @@ class FormPersonValidators {
         if (oldValue != newValue) verifyRight()
     }
 
-    fun verifyRight() {
-        isRight.value = personValues() && juridicalValues()
+    fun streetValidator(street: Editable) {
+        val str = street.toString()
+        val oldValue = this.street.value
+        val newValue = (isJuridical && empty(str)) || !empty(str)
+        this.street.value = newValue
+        if (oldValue != newValue) verifyRight()
     }
+
+
+    fun numberValidator(number: Editable) {
+        val str = number.toString()
+        val oldValue = this.number.value
+        val newValue = !empty(str)
+        this.number.value = newValue
+        if (oldValue != newValue) verifyRight()
+    }
+
+    fun neighborhoodValidator(neighborhood: Editable) {
+        val str = neighborhood.toString()
+        val oldValue = this.neighborhood.value
+        val newValue = !empty(str)
+        this.neighborhood.value = newValue
+        if (oldValue != newValue) verifyRight()
+    }
+
+    fun zipcodeValidator(zipcode: Editable) {
+        val str = zipcode.toString()
+        val oldValue = this.zipcode.value
+        val newValue = CEPValidator.isValid(str)
+        this.zipcode.value = newValue
+        if (oldValue != newValue) verifyRight()
+    }
+
+    fun cityValidator(city: Editable) {
+        val str = city.toString()
+        val oldValue = this.city.value
+        val newValue = !empty(str)
+        this.city.value = newValue
+        if (oldValue != newValue) verifyRight()
+    }
+
+    fun complementValidator(complement: Editable) {
+        val str = complement.toString()
+        val oldValue = this.complement.value
+        val newValue = !empty(str)
+        this.complement.value = newValue
+        if (oldValue != newValue) verifyRight()
+    }
+
+    fun stateValidator(b: Boolean) {
+        val oldValue = this.state.value
+        this.state.value = b
+        if(oldValue != b) verifyRight()
+    }
+
+    fun verifyRight() {
+        isRight.value = personValues() && juridicalValues() && adressValues()
+    }
+
+    private fun adressValues() =
+        (!hasAdress || (street.value ?: false && number.value ?: false && neighborhood.value ?: false && zipcode.value ?: false && city.value ?: false && state.value ?: false))
 
     private fun juridicalValues() = (!isJuridical || (cnpj.value ?: false && corporateName.value ?: false))
 
@@ -109,6 +171,11 @@ class FormPersonValidators {
         verifyRight()
     }
 
+    fun updateAdress(change: Boolean){
+        hasAdress = change
+        verifyRight()
+    }
+
     fun setValidFieldsForInputPerson(person: Person) {
         if(person.name != null ) name.value = true
         if(person.cpf != null) cpf.value = true
@@ -122,7 +189,5 @@ class FormPersonValidators {
         verifyRight()
     }
 
-    fun updateAdress(change: Boolean) {
-        hasAdress = change
-    }
+
 }
